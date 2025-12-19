@@ -35,7 +35,7 @@ const reasons = [
 
 export const WhyChooseUs = () => {
   return (
-    <section className="section-padding bg-muted/50">
+    <section className="section-padding bg-background">
       <div className="container-narrow">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left Content */}
@@ -69,10 +69,10 @@ export const WhyChooseUs = () => {
 
           {/* Right Content - Features Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {reasons.map((reason, index) => (
+            {reasons.map((reason) => (
               <div
                 key={reason.title}
-                className="bg-card rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-border/50"
+                className="bg-card rounded-xl p-6 border border-border hover:border-accent/30 transition-all duration-300"
               >
                 <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
                   <reason.icon className="w-6 h-6 text-accent" />

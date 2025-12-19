@@ -35,7 +35,7 @@ const industries = [
 
 export const IndustriesSection = () => {
   return (
-    <section className="section-padding bg-background">
+    <section className="section-padding bg-card">
       <div className="container-narrow">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -55,7 +55,7 @@ export const IndustriesSection = () => {
           {industries.map((industry) => (
             <div
               key={industry.name}
-              className="group text-center p-6 rounded-2xl bg-card border border-border/50 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300"
+              className="group text-center p-6 rounded-2xl bg-background border border-border hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300"
             >
               <div className="w-16 h-16 rounded-xl bg-muted flex items-center justify-center mx-auto mb-4 group-hover:bg-accent/10 transition-colors duration-300">
                 <industry.icon className="w-8 h-8 text-muted-foreground group-hover:text-accent transition-colors duration-300" />

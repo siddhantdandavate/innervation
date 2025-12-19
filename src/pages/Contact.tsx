@@ -44,16 +44,16 @@ const Contact = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-[image:var(--gradient-hero)]">
+      <section className="pt-32 pb-20 bg-background border-b border-border">
         <div className="container-narrow">
           <div className="max-w-3xl">
             <span className="text-accent font-semibold text-sm uppercase tracking-wider mb-4 block">
               Contact Us
             </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-primary-foreground leading-tight mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-foreground leading-tight mb-6">
               Let's Start a Conversation
             </h1>
-            <p className="text-xl text-primary-foreground/80 leading-relaxed">
+            <p className="text-xl text-muted-foreground leading-relaxed">
               Ready to transform your business with innovative technology solutions? Our team of experts is here to help you navigate the path forward.
             </p>
           </div>
@@ -61,12 +61,12 @@ const Contact = () => {
       </section>
 
       {/* Contact Form & Info */}
-      <section className="section-padding bg-background">
+      <section className="section-padding bg-card">
         <div className="container-narrow">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
             {/* Contact Form */}
             <div className="lg:col-span-2">
-              <div className="bg-card rounded-2xl p-8 md:p-10 shadow-lg border border-border/50">
+              <div className="bg-background rounded-2xl p-8 md:p-10 border border-border">
                 <h2 className="text-2xl font-heading font-bold text-foreground mb-2">
                   Request a Consultation
                 </h2>
@@ -91,7 +91,7 @@ const Contact = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
                         <label htmlFor="firstName" className="block text-sm font-medium text-foreground mb-2">
-                          First Name <span className="text-destructive">*</span>
+                          First Name <span className="text-accent">*</span>
                         </label>
                         <Input
                           id="firstName"
@@ -101,12 +101,12 @@ const Contact = () => {
                           value={formData.firstName}
                           onChange={handleChange}
                           placeholder="John"
-                          className="h-12"
+                          className="h-12 bg-card border-border"
                         />
                       </div>
                       <div>
                         <label htmlFor="lastName" className="block text-sm font-medium text-foreground mb-2">
-                          Last Name <span className="text-destructive">*</span>
+                          Last Name <span className="text-accent">*</span>
                         </label>
                         <Input
                           id="lastName"
@@ -116,7 +116,7 @@ const Contact = () => {
                           value={formData.lastName}
                           onChange={handleChange}
                           placeholder="Doe"
-                          className="h-12"
+                          className="h-12 bg-card border-border"
                         />
                       </div>
                     </div>
@@ -124,7 +124,7 @@ const Contact = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
                         <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                          Business Email <span className="text-destructive">*</span>
+                          Business Email <span className="text-accent">*</span>
                         </label>
                         <Input
                           id="email"
@@ -134,7 +134,7 @@ const Contact = () => {
                           value={formData.email}
                           onChange={handleChange}
                           placeholder="john.doe@company.com"
-                          className="h-12"
+                          className="h-12 bg-card border-border"
                         />
                       </div>
                       <div>
@@ -148,7 +148,7 @@ const Contact = () => {
                           value={formData.company}
                           onChange={handleChange}
                           placeholder="Acme Corporation"
-                          className="h-12"
+                          className="h-12 bg-card border-border"
                         />
                       </div>
                     </div>
@@ -164,13 +164,13 @@ const Contact = () => {
                         value={formData.phone}
                         onChange={handleChange}
                         placeholder="+1 (234) 567-890"
-                        className="h-12"
+                        className="h-12 bg-card border-border"
                       />
                     </div>
 
                     <div>
                       <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                        How Can We Help? <span className="text-destructive">*</span>
+                        How Can We Help? <span className="text-accent">*</span>
                       </label>
                       <Textarea
                         id="message"
@@ -180,7 +180,7 @@ const Contact = () => {
                         onChange={handleChange}
                         placeholder="Tell us about your project, challenges, or goals..."
                         rows={5}
-                        className="resize-none"
+                        className="resize-none bg-card border-border"
                       />
                     </div>
 
@@ -274,7 +274,7 @@ const Contact = () => {
               </div>
 
               {/* Quick Response Promise */}
-              <div className="bg-muted/50 rounded-2xl p-6 border border-border/50">
+              <div className="bg-background rounded-2xl p-6 border border-border">
                 <h4 className="font-heading font-semibold text-foreground mb-3">
                   Our Response Promise
                 </h4>

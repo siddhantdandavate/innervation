@@ -24,7 +24,7 @@ const services = [
       "Change management and adoption planning",
       "Technology governance frameworks",
     ],
-    color: "from-blue-500 to-cyan-500",
+    href: "/services/digital-transformation",
   },
   {
     icon: Brain,
@@ -37,7 +37,7 @@ const services = [
       "Predictive analytics implementations",
       "AI-powered customer experience solutions",
     ],
-    color: "from-violet-500 to-purple-500",
+    href: "/services/ai-automation",
   },
   {
     icon: Cloud,
@@ -50,7 +50,7 @@ const services = [
       "Cost optimization and FinOps",
       "Cloud-native application development",
     ],
-    color: "from-cyan-500 to-teal-500",
+    href: "/services/cloud-solutions",
   },
   {
     icon: Database,
@@ -63,7 +63,7 @@ const services = [
       "Real-time analytics solutions",
       "Data governance and quality frameworks",
     ],
-    color: "from-orange-500 to-red-500",
+    href: "/services/data-engineering",
   },
   {
     icon: Code,
@@ -76,7 +76,7 @@ const services = [
       "Microservices architecture",
       "DevOps and CI/CD implementation",
     ],
-    color: "from-green-500 to-emerald-500",
+    href: "/services/custom-development",
   },
   {
     icon: Settings,
@@ -89,7 +89,7 @@ const services = [
       "Patch management and updates",
       "Disaster recovery and business continuity",
     ],
-    color: "from-slate-500 to-zinc-600",
+    href: "/services/managed-services",
   },
 ];
 
@@ -97,16 +97,16 @@ const Services = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-[image:var(--gradient-hero)]">
+      <section className="pt-32 pb-20 bg-background border-b border-border">
         <div className="container-narrow">
           <div className="max-w-3xl">
             <span className="text-accent font-semibold text-sm uppercase tracking-wider mb-4 block">
               Our Services
             </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-primary-foreground leading-tight mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-foreground leading-tight mb-6">
               End-to-End Technology Solutions for Enterprise Success
             </h1>
-            <p className="text-xl text-primary-foreground/80 leading-relaxed">
+            <p className="text-xl text-muted-foreground leading-relaxed">
               From strategic consulting to hands-on implementation, we deliver comprehensive IT services that drive digital transformation and business growth.
             </p>
           </div>
@@ -114,7 +114,7 @@ const Services = () => {
       </section>
 
       {/* Services List */}
-      <section className="section-padding bg-background">
+      <section className="section-padding bg-card">
         <div className="container-narrow">
           <div className="space-y-12">
             {services.map((service, index) => (
@@ -125,26 +125,25 @@ const Services = () => {
                 }`}
               >
                 <div className={index % 2 === 1 ? "lg:order-2" : ""}>
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center">
-                      <service.icon className="w-7 h-7 text-accent" />
-                    </div>
-                    <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground">
-                      {service.title}
-                    </h2>
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="accent-dot" />
+                    <service.icon className="w-6 h-6 text-accent" />
                   </div>
+                  <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground mb-4">
+                    {service.title}
+                  </h2>
                   <p className="text-muted-foreground text-lg leading-relaxed mb-8">
                     {service.description}
                   </p>
                   <Button asChild variant="accent" size="lg">
-                    <Link to="/contact" className="flex items-center gap-2">
+                    <Link to={service.href} className="flex items-center gap-2">
                       Explore This Service
                       <ArrowRight size={18} />
                     </Link>
                   </Button>
                 </div>
 
-                <div className={`bg-card rounded-2xl p-8 shadow-md border border-border/50 ${
+                <div className={`bg-background rounded-2xl p-8 border border-border ${
                   index % 2 === 1 ? "lg:order-1" : ""
                 }`}>
                   <h3 className="font-heading font-semibold text-foreground mb-6">
@@ -166,7 +165,7 @@ const Services = () => {
       </section>
 
       {/* Process Section */}
-      <section className="section-padding bg-muted/50">
+      <section className="section-padding bg-background">
         <div className="container-narrow">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-accent font-semibold text-sm uppercase tracking-wider mb-4 block">
@@ -189,7 +188,7 @@ const Services = () => {
             ].map((phase) => (
               <div
                 key={phase.step}
-                className="relative p-8 rounded-2xl bg-card border border-border/50 hover:shadow-lg transition-all duration-300"
+                className="relative p-8 rounded-2xl bg-card border border-border hover:border-accent/30 transition-all duration-300"
               >
                 <div className="text-6xl font-heading font-bold text-accent/20 absolute top-4 right-4">
                   {phase.step}
@@ -207,23 +206,26 @@ const Services = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-primary text-primary-foreground">
+      <section className="section-padding bg-card border-t border-border">
         <div className="container-narrow">
           <div className="text-center max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-6">
+            <span className="text-accent font-semibold text-sm uppercase tracking-wider mb-4 block">
+              Next Step
+            </span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-foreground mb-6">
               Let's Build Your Solution
             </h2>
-            <p className="text-primary-foreground/80 text-lg leading-relaxed mb-10">
+            <p className="text-muted-foreground text-lg leading-relaxed mb-10">
               Ready to discuss your technology needs? Our team of experts is here to help you navigate the complexities and deliver results that matter.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button asChild variant="hero" size="xl">
+              <Button asChild variant="accent" size="xl">
                 <Link to="/contact" className="flex items-center gap-2">
                   Request a Consultation
                   <ArrowRight size={20} />
                 </Link>
               </Button>
-              <Button asChild variant="hero-outline" size="xl">
+              <Button asChild variant="outline" size="xl">
                 <Link to="/about">Learn About Us</Link>
               </Button>
             </div>
