@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import Logo from "@/components/Logo";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -38,19 +39,7 @@ export const Header = () => {
       <div className="container-narrow">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 bg-accent rounded-lg flex items-center justify-center shadow-md group-hover:shadow-glow transition-shadow duration-300">
-              <span className="text-accent-foreground font-heading font-bold text-lg">I</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="font-heading font-bold text-lg leading-tight text-foreground">
-                Innervation
-              </span>
-              <span className="text-xs font-medium leading-tight text-muted-foreground">
-                IT Solutions
-              </span>
-            </div>
-          </Link>
+          <Logo size="md" />
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1">

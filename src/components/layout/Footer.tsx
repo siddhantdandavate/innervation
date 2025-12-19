@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Linkedin, Twitter } from "lucide-react";
+import Logo from "@/components/Logo";
 
 const quickLinks = [
   { label: "Home", href: "/" },
@@ -24,15 +25,9 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {/* Company Info */}
           <div className="lg:col-span-1">
-            <Link to="/" className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 bg-accent rounded-lg flex items-center justify-center">
-                <span className="text-accent-foreground font-heading font-bold text-lg">I</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="font-heading font-bold text-lg leading-tight text-foreground">Innervation</span>
-                <span className="text-xs font-medium leading-tight text-muted-foreground">IT Solutions</span>
-              </div>
-            </Link>
+            <div className="mb-6">
+              <Logo size="md" />
+            </div>
             <p className="text-muted-foreground text-sm leading-relaxed mb-6">
               Empowering businesses with innovative technology solutions. We transform complex challenges into competitive advantages through strategic IT consulting, AI integration, and digital transformation.
             </p>
