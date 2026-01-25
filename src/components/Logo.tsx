@@ -9,67 +9,79 @@ interface LogoProps {
 
 const Logo = ({ variant = "default", showText = true, size = "md", className = "" }: LogoProps) => {
   const sizes = {
-    sm: { icon: 32, text: "text-lg" },
-    md: { icon: 40, text: "text-xl" },
-    lg: { icon: 56, text: "text-2xl" },
+    sm: { icon: 40, text: "text-lg" },
+    md: { icon: 50, text: "text-xl" },
+    lg: { icon: 70, text: "text-2xl" },
   };
 
   const { icon, text } = sizes[size];
 
+  // Color variants based on context
+  const textColor = variant === "light" ? "text-white" : "text-foreground";
+
   return (
     <Link to="/" className={`flex items-center gap-3 group ${className}`}>
-      {/* Logo Icon - Abstract "I" with neural network nodes representing IT innovation */}
+      {/* Logo Icon - Two interlocking figures representing partnership and innovation */}
       <svg
         width={icon}
         height={icon}
-        viewBox="0 0 48 48"
+        viewBox="0 0 100 100"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className="transition-transform duration-300 group-hover:scale-105"
       >
-        {/* Background hexagon shape */}
-        <path
-          d="M24 2L43.0526 13V35L24 46L4.94744 35V13L24 2Z"
-          className="fill-accent"
-        />
+        {/* Blue figure (top-left) - representing technology/innovation */}
+        <g>
+          {/* Head */}
+          <circle cx="45" cy="20" r="10" fill="#0088CC" />
+          {/* Body arc */}
+          <path
+            d="M20 75 C20 45, 35 30, 55 35 C65 38, 70 50, 65 65"
+            stroke="#0088CC"
+            strokeWidth="12"
+            strokeLinecap="round"
+            fill="none"
+          />
+          {/* Inner swoosh */}
+          <path
+            d="M30 60 C35 45, 45 40, 55 45"
+            stroke="#00AAEE"
+            strokeWidth="6"
+            strokeLinecap="round"
+            fill="none"
+          />
+        </g>
         
-        {/* Inner hexagon */}
-        <path
-          d="M24 8L38 16.5V31.5L24 40L10 31.5V16.5L24 8Z"
-          className="fill-background"
-        />
-        
-        {/* Central "I" letterform with nodes */}
-        <path
-          d="M20 16H28V18H25V30H28V32H20V30H23V18H20V16Z"
-          className="fill-accent"
-        />
-        
-        {/* Neural network nodes */}
-        <circle cx="16" cy="20" r="2" className="fill-accent" />
-        <circle cx="32" cy="20" r="2" className="fill-accent" />
-        <circle cx="16" cy="28" r="2" className="fill-accent" />
-        <circle cx="32" cy="28" r="2" className="fill-accent" />
-        
-        {/* Connecting lines */}
-        <line x1="18" y1="20" x2="20" y2="17" className="stroke-accent" strokeWidth="1" />
-        <line x1="30" y1="20" x2="28" y2="17" className="stroke-accent" strokeWidth="1" />
-        <line x1="18" y1="28" x2="20" y2="31" className="stroke-accent" strokeWidth="1" />
-        <line x1="30" y1="28" x2="28" y2="31" className="stroke-accent" strokeWidth="1" />
-        
-        {/* Additional accent nodes */}
-        <circle cx="24" cy="12" r="1.5" className="fill-accent/70" />
-        <circle cx="24" cy="36" r="1.5" className="fill-accent/70" />
+        {/* Red figure (bottom-right) - representing people/partnership */}
+        <g>
+          {/* Head */}
+          <circle cx="60" cy="55" r="8" fill="#CC3333" />
+          {/* Body arc */}
+          <path
+            d="M80 25 C80 55, 65 70, 45 65 C35 62, 30 50, 35 35"
+            stroke="#CC3333"
+            strokeWidth="12"
+            strokeLinecap="round"
+            fill="none"
+          />
+          {/* Inner swoosh */}
+          <path
+            d="M70 40 C65 55, 55 60, 45 55"
+            stroke="#EE4444"
+            strokeWidth="6"
+            strokeLinecap="round"
+            fill="none"
+          />
+        </g>
       </svg>
 
       {showText && (
         <div className="flex flex-col">
-          <span className={`${text} font-heading font-bold tracking-tight leading-tight`}>
-            <span className="text-accent">Innervation</span>
-            <span className="text-foreground"> IT</span>
+          <span className={`${text} font-heading font-bold tracking-tight leading-tight ${textColor}`}>
+            Innervation IT Solutions
           </span>
-          <span className="text-xs text-muted-foreground tracking-[0.2em] uppercase">
-            Solutions
+          <span className={`text-xs tracking-[0.15em] uppercase ${variant === "light" ? "text-white/70" : "text-muted-foreground"}`}>
+            world of possibilities!
           </span>
         </div>
       )}

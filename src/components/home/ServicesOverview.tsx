@@ -50,15 +50,15 @@ const services = [
 
 export const ServicesOverview = () => {
   return (
-    <section className="section-padding bg-card">
+    <section className="section-padding bg-background">
       <div className="container-narrow">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-accent font-semibold text-sm uppercase tracking-wider mb-4 block">
+          <span className="text-sm font-semibold tracking-wider uppercase text-[hsl(72,100%,50%)] bg-[hsl(72,100%,50%)]/10 px-4 py-2 rounded-full">
             Our Expertise
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-foreground mb-6">
-            Comprehensive IT Solutions for Modern Enterprises
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-foreground mt-6 mb-6">
+            Comprehensive IT Solutions for <span className="text-[hsl(72,100%,50%)]">Modern Enterprises</span>
           </h2>
           <p className="text-muted-foreground text-lg leading-relaxed">
             From strategic consulting to hands-on implementation, we deliver end-to-end technology services that accelerate your digital journey.
@@ -71,20 +71,19 @@ export const ServicesOverview = () => {
             <Link
               to={service.href}
               key={service.title}
-              className="group bg-background rounded-2xl p-8 border border-border hover:border-accent/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-lg hover:shadow-accent/5"
+              className="group bg-card rounded-xl p-8 border border-border hover:border-[hsl(72,100%,50%)]/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="flex items-center gap-3 mb-4">
-                <span className="accent-dot" />
-                <service.icon className="w-6 h-6 text-accent" />
+              <div className="w-12 h-12 rounded-lg bg-[hsl(72,100%,50%)]/10 flex items-center justify-center mb-4">
+                <service.icon className="w-6 h-6 text-[hsl(72,100%,50%)]" />
               </div>
-              <h3 className="text-xl font-heading font-semibold text-foreground mb-3 group-hover:text-accent transition-colors duration-300">
+              <h3 className="text-xl font-heading font-semibold text-foreground mb-3 group-hover:text-[hsl(72,100%,50%)] transition-colors duration-300">
                 {service.title}
               </h3>
               <p className="text-muted-foreground leading-relaxed mb-6">
                 {service.description}
               </p>
-              <div className="inline-flex items-center gap-2 text-accent font-medium text-sm group-hover:gap-3 transition-all duration-300">
+              <div className="inline-flex items-center gap-2 text-[hsl(72,100%,50%)] font-medium text-sm group-hover:gap-3 transition-all duration-300">
                 Learn More
                 <ArrowRight size={16} />
               </div>
@@ -96,7 +95,7 @@ export const ServicesOverview = () => {
         <div className="text-center mt-12">
           <Link
             to="/services"
-            className="inline-flex items-center gap-2 text-accent font-semibold hover:gap-3 transition-all duration-300"
+            className="inline-flex items-center gap-2 text-[hsl(72,100%,50%)] font-semibold hover:gap-3 transition-all duration-300"
           >
             View All Services
             <ArrowRight size={18} />

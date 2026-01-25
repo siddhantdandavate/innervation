@@ -20,7 +20,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
-        heading: ["Plus Jakarta Sans", "system-ui", "sans-serif"],
+        heading: ["Montserrat", "system-ui", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -56,14 +56,14 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        hero: {
+          bg: "hsl(var(--hero-bg))",
+          foreground: "hsl(var(--hero-foreground))",
+        },
         brand: {
-          dark: "hsl(var(--brand-dark))",
-          card: "hsl(var(--brand-card))",
-          orange: "hsl(var(--brand-orange))",
-          "orange-light": "hsl(var(--brand-orange-light))",
-          "orange-dark": "hsl(var(--brand-orange-dark))",
-          gray: "hsl(var(--brand-gray))",
-          light: "hsl(var(--brand-light))",
+          blue: "hsl(var(--brand-blue))",
+          red: "hsl(var(--brand-red))",
+          lime: "hsl(72 100% 50%)",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
@@ -86,7 +86,6 @@ export default {
         md: "var(--shadow-md)",
         lg: "var(--shadow-lg)",
         xl: "var(--shadow-xl)",
-        glow: "var(--shadow-glow)",
       },
       keyframes: {
         "accordion-down": {
@@ -117,6 +116,10 @@ export default {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-10px)" },
         },
+        "pulse-glow": {
+          "0%, 100%": { opacity: "0.4" },
+          "50%": { opacity: "0.8" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -126,6 +129,7 @@ export default {
         "slide-in-right": "slide-in-right 0.5s ease-out forwards",
         "scale-in": "scale-in 0.3s ease-out forwards",
         float: "float 6s ease-in-out infinite",
+        "pulse-glow": "pulse-glow 3s ease-in-out infinite",
       },
     },
   },
