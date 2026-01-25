@@ -14,7 +14,143 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      contact_submissions: {
+        Row: {
+          company: string | null
+          created_at: string
+          email: string
+          first_name: string
+          id: string
+          last_name: string
+          message: string
+          phone: string | null
+          status: string | null
+          visitor_id: string | null
+        }
+        Insert: {
+          company?: string | null
+          created_at?: string
+          email: string
+          first_name: string
+          id?: string
+          last_name: string
+          message: string
+          phone?: string | null
+          status?: string | null
+          visitor_id?: string | null
+        }
+        Update: {
+          company?: string | null
+          created_at?: string
+          email?: string
+          first_name?: string
+          id?: string
+          last_name?: string
+          message?: string
+          phone?: string | null
+          status?: string | null
+          visitor_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contact_submissions_visitor_id_fkey"
+            columns: ["visitor_id"]
+            isOneToOne: false
+            referencedRelation: "site_visitors"
+            referencedColumns: ["visitor_id"]
+          },
+        ]
+      }
+      reviews: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          customer_company: string | null
+          customer_designation: string | null
+          customer_name: string
+          id: string
+          is_featured: boolean | null
+          is_published: boolean | null
+          rating: number | null
+          review_text: string
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          customer_company?: string | null
+          customer_designation?: string | null
+          customer_name: string
+          id?: string
+          is_featured?: boolean | null
+          is_published?: boolean | null
+          rating?: number | null
+          review_text: string
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          customer_company?: string | null
+          customer_designation?: string | null
+          customer_name?: string
+          id?: string
+          is_featured?: boolean | null
+          is_published?: boolean | null
+          rating?: number | null
+          review_text?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      site_visitors: {
+        Row: {
+          city: string | null
+          consent_date: string | null
+          consent_given: boolean | null
+          country: string | null
+          first_visit: string
+          id: string
+          ip_address: string | null
+          last_visit: string
+          pages_visited: string[] | null
+          referrer: string | null
+          user_agent: string | null
+          visit_count: number | null
+          visitor_id: string
+        }
+        Insert: {
+          city?: string | null
+          consent_date?: string | null
+          consent_given?: boolean | null
+          country?: string | null
+          first_visit?: string
+          id?: string
+          ip_address?: string | null
+          last_visit?: string
+          pages_visited?: string[] | null
+          referrer?: string | null
+          user_agent?: string | null
+          visit_count?: number | null
+          visitor_id: string
+        }
+        Update: {
+          city?: string | null
+          consent_date?: string | null
+          consent_given?: boolean | null
+          country?: string | null
+          first_visit?: string
+          id?: string
+          ip_address?: string | null
+          last_visit?: string
+          pages_visited?: string[] | null
+          referrer?: string | null
+          user_agent?: string | null
+          visit_count?: number | null
+          visitor_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

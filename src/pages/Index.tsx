@@ -4,6 +4,7 @@ import { ServicesOverview } from "@/components/home/ServicesOverview";
 import { WhyChooseUs } from "@/components/home/WhyChooseUs";
 import { IndustriesSection } from "@/components/home/IndustriesSection";
 import { TechExpertise } from "@/components/home/TechExpertise";
+import CustomerReviews from "@/components/home/CustomerReviews";
 import { CTASection } from "@/components/home/CTASection";
 
 const Index = () => {
@@ -14,6 +15,7 @@ const Index = () => {
       <WhyChooseUs />
       <IndustriesSection />
       <TechExpertise />
+      <CustomerReviews />
       <CTASection />
     </Layout>
   );

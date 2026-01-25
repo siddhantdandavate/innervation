@@ -1,102 +1,189 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
 import Logo from "@/components/Logo";
 
-const navItems = [
-  { label: "Home", href: "/" },
-  { label: "About Us", href: "/about" },
-  { label: "Services", href: "/services" },
-  { label: "Contact", href: "/contact" },
+const navLinks = [
+  { name: "Home", href: "/" },
+  { name: "About Us", href: "/about" },
+  {
+    name: "Services",
+    href: "/services",
+    submenu: [
+      { name: "Digital Transformation", href: "/services/digital-transformation" },
+      { name: "AI & Automation", href: "/services/ai-automation" },
+      { name: "Cloud Solutions", href: "/services/cloud-solutions" },
+      { name: "Data Engineering", href: "/services/data-engineering" },
+      { name: "Custom Development", href: "/services/custom-development" },
+      { name: "Managed Services", href: "/services/managed-services" },
+    ],
+  },
+  { name: "Contact", href: "/contact" },
 ];
 
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
+    setIsServicesOpen(false);
   }, [location.pathname]);
+
+  const isActive = (href: string) => {
+    if (href === "/") return location.pathname === "/";
+    return location.pathname.startsWith(href);
+  };
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-background/95 backdrop-blur-md border-b border-border py-3"
+          ? "bg-white shadow-md py-3"
           : "bg-transparent py-5"
       }`}
     >
       <div className="container-narrow">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <Logo size="md" />
+        <nav className="flex items-center justify-between">
+          <Logo variant={isScrolled ? "default" : "light"} size="md" />
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                to={item.href}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
-                  location.pathname === item.href
-                    ? "text-accent bg-accent/10"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
+          <div className="hidden lg:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <div key={link.name} className="relative group">
+                {link.submenu ? (
+                  <div
+                    className="flex items-center gap-1 cursor-pointer"
+                    onMouseEnter={() => setIsServicesOpen(true)}
+                    onMouseLeave={() => setIsServicesOpen(false)}
+                  >
+                    <Link
+                      to={link.href}
+                      className={`text-sm font-medium transition-colors ${
+                        isScrolled
+                          ? isActive(link.href)
+                            ? "text-foreground"
+                            : "text-muted-foreground hover:text-foreground"
+                          : isActive(link.href)
+                            ? "text-white"
+                            : "text-white/80 hover:text-white"
+                      }`}
+                    >
+                      {link.name}
+                    </Link>
+                    <ChevronDown size={14} className={isScrolled ? "text-muted-foreground" : "text-white/80"} />
+                    
+                    {/* Dropdown */}
+                    <div
+                      className={`absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-border overflow-hidden transition-all duration-200 ${
+                        isServicesOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2"
+                      }`}
+                    >
+                      {link.submenu.map((sublink) => (
+                        <Link
+                          key={sublink.href}
+                          to={sublink.href}
+                          className="block px-4 py-3 text-sm text-foreground hover:bg-secondary transition-colors border-b border-border/50 last:border-0"
+                        >
+                          {sublink.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <Link
+                    to={link.href}
+                    className={`text-sm font-medium transition-colors ${
+                      isScrolled
+                        ? isActive(link.href)
+                          ? "text-foreground"
+                          : "text-muted-foreground hover:text-foreground"
+                        : isActive(link.href)
+                          ? "text-white"
+                          : "text-white/80 hover:text-white"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                )}
+              </div>
+            ))}
+
+            <Link to="/contact">
+              <Button 
+                className={`font-semibold transition-all ${
+                  isScrolled 
+                    ? "bg-foreground text-background hover:bg-foreground/90" 
+                    : "bg-white text-foreground hover:bg-white/90"
                 }`}
               >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-
-          {/* CTA Button */}
-          <div className="hidden md:block">
-            <Button asChild variant="accent" size="default">
-              <Link to="/contact">Talk to Us</Link>
-            </Button>
+                Get in Touch
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
           <button
+            className={`lg:hidden p-2 ${isScrolled ? "text-foreground" : "text-white"}`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg text-foreground hover:bg-muted transition-colors duration-300"
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
-        </div>
+        </nav>
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <nav className="md:hidden mt-4 pb-4 animate-fade-in">
-            <div className="flex flex-col gap-2 bg-card rounded-xl p-4 border border-border">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  to={item.href}
-                  className={`px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300 ${
-                    location.pathname === item.href
-                      ? "text-accent bg-accent/10"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                  }`}
-                >
-                  {item.label}
-                </Link>
+          <div className="lg:hidden mt-4 pb-4 animate-fade-in">
+            <div className="bg-white rounded-lg shadow-xl border border-border p-4 space-y-2">
+              {navLinks.map((link) => (
+                <div key={link.name}>
+                  <Link
+                    to={link.href}
+                    className={`block px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+                      isActive(link.href)
+                        ? "bg-secondary text-foreground"
+                        : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                  {link.submenu && (
+                    <div className="ml-4 mt-1 space-y-1">
+                      {link.submenu.map((sublink) => (
+                        <Link
+                          key={sublink.href}
+                          to={sublink.href}
+                          className="block px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                        >
+                          {sublink.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
               ))}
-              <Button asChild variant="accent" size="default" className="mt-2">
-                <Link to="/contact">Talk to Us</Link>
-              </Button>
+              <div className="pt-2">
+                <Link to="/contact" className="block">
+                  <Button className="w-full bg-foreground text-background hover:bg-foreground/90">
+                    Get in Touch
+                  </Button>
+                </Link>
+              </div>
             </div>
-          </nav>
+          </div>
         )}
       </div>
     </header>
