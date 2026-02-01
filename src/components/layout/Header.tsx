@@ -11,12 +11,12 @@ const navLinks = [
     name: "Services",
     href: "/services",
     submenu: [
-      { name: "Digital Transformation", href: "/services/digital-transformation" },
-      { name: "AI & Automation", href: "/services/ai-automation" },
-      { name: "Cloud Solutions", href: "/services/cloud-solutions" },
-      { name: "Data Engineering", href: "/services/data-engineering" },
-      { name: "Custom Development", href: "/services/custom-development" },
-      { name: "Managed Services", href: "/services/managed-services" },
+      { name: "Website Development", href: "/services/web-development" },
+      { name: "Mobile App Development", href: "/services/mobile-development" },
+      { name: "Continuous Support", href: "/services/support" },
+      { name: "Project Management", href: "/services/project-management" },
+      { name: "Consulting", href: "/services/consulting" },
+      { name: "Social Media Marketing", href: "/services/social-media" },
     ],
   },
   { name: "Contact", href: "/contact" },
@@ -52,12 +52,12 @@ export const Header = () => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? "bg-white shadow-md py-3"
-          : "bg-transparent py-5"
+          : "bg-[hsl(220,30%,8%)]/95 backdrop-blur-sm py-5"
       }`}
     >
       <div className="container-narrow">
         <nav className="flex items-center justify-between">
-          <Logo variant={isScrolled ? "default" : "light"} size="md" />
+          <Logo variant="light" size="md" />
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">

@@ -115,13 +115,13 @@ const CookieConsent = () => {
             <Button
               onClick={handleDecline}
               variant="outline"
-              className="border-white/30 text-white hover:bg-white/10 hover:text-white"
+              className="border-white/50 bg-transparent text-white hover:bg-white/10 hover:text-white px-6"
             >
               Cookie Settings
             </Button>
             <Button
               onClick={handleAccept}
-              className="bg-white text-foreground hover:bg-white/90 font-semibold"
+              className="bg-[hsl(72,100%,50%)] text-[hsl(220,20%,10%)] hover:bg-[hsl(72,100%,45%)] font-semibold px-6"
             >
               Accept All
             </Button>

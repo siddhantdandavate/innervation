@@ -7,12 +7,12 @@ import Index from "./pages/Index";
 import About from "./pages/About";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
-import DigitalTransformation from "./pages/services/DigitalTransformation";
-import AIAutomation from "./pages/services/AIAutomation";
-import CloudSolutions from "./pages/services/CloudSolutions";
-import DataEngineering from "./pages/services/DataEngineering";
-import CustomDevelopment from "./pages/services/CustomDevelopment";
-import ManagedServices from "./pages/services/ManagedServices";
+import WebDevelopment from "./pages/services/WebDevelopment";
+import MobileDevelopment from "./pages/services/MobileDevelopment";
+import Support from "./pages/services/Support";
+import ProjectManagement from "./pages/services/ProjectManagement";
+import Consulting from "./pages/services/Consulting";
+import SocialMedia from "./pages/services/SocialMedia";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,12 +27,12 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
-          <Route path="/services/digital-transformation" element={<DigitalTransformation />} />
-          <Route path="/services/ai-automation" element={<AIAutomation />} />
-          <Route path="/services/cloud-solutions" element={<CloudSolutions />} />
-          <Route path="/services/data-engineering" element={<DataEngineering />} />
-          <Route path="/services/custom-development" element={<CustomDevelopment />} />
-          <Route path="/services/managed-services" element={<ManagedServices />} />
+          <Route path="/services/web-development" element={<WebDevelopment />} />
+          <Route path="/services/mobile-development" element={<MobileDevelopment />} />
+          <Route path="/services/support" element={<Support />} />
+          <Route path="/services/project-management" element={<ProjectManagement />} />
+          <Route path="/services/consulting" element={<Consulting />} />
+          <Route path="/services/social-media" element={<SocialMedia />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
