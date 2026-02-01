@@ -10,11 +10,12 @@ const quickLinks = [
 ];
 
 const services = [
-  { name: "Deep Tech", href: "/services/ai-automation" },
-  { name: "Development", href: "/services/custom-development" },
-  { name: "DevOps & Testing", href: "/services/cloud-solutions" },
-  { name: "Data Management", href: "/services/data-engineering" },
-  { name: "Digital Consulting", href: "/services/digital-transformation" },
+  { name: "Website Development", href: "/services/web-development" },
+  { name: "Mobile App Development", href: "/services/mobile-development" },
+  { name: "Continuous Support", href: "/services/support" },
+  { name: "Project Management", href: "/services/project-management" },
+  { name: "Consulting", href: "/services/consulting" },
+  { name: "Social Media Marketing", href: "/services/social-media" },
 ];
 
 export const Footer = () => {
@@ -51,7 +52,7 @@ export const Footer = () => {
 
           {/* Services */}
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wider mb-4">5D Services</h4>
+            <h4 className="text-sm font-semibold uppercase tracking-wider mb-4">Services</h4>
             <ul className="space-y-2">
               {services.map((service) => (
                 <li key={service.name}>
