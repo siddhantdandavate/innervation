@@ -29,7 +29,7 @@ const CustomerReviews = () => {
         .eq("is_published", true)
         .order("is_featured", { ascending: false })
         .order("created_at", { ascending: false })
-        .limit(6);
+        .limit(3);
 
       if (error) throw error;
       setReviews(data || []);
@@ -38,16 +38,6 @@ const CustomerReviews = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  const renderStars = (rating: number) => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <Star
-        key={i}
-        size={16}
-        className={i < rating ? "fill-brand-lime text-brand-lime" : "text-gray-300"}
-      />
-    ));
   };
 
   const getInitials = (name: string) => {
@@ -61,7 +51,7 @@ const CustomerReviews = () => {
 
   if (loading) {
     return (
-      <section className="section-padding bg-secondary">
+      <section className="py-20 bg-muted/30">
         <div className="container-narrow">
           <div className="text-center">
             <p className="text-muted-foreground">Loading reviews...</p>
@@ -76,75 +66,74 @@ const CustomerReviews = () => {
   }
 
   return (
-    <section className="section-padding bg-secondary">
+    <section className="py-20 bg-muted/30">
       <div className="container-narrow">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <span className="text-sm font-semibold tracking-wider uppercase text-brand-lime bg-brand-lime/10 px-4 py-2 rounded-full">
+        <div className="text-center mb-12">
+          <span className="text-muted-foreground text-sm uppercase tracking-wider">
             Testimonials
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-foreground mt-6 mb-4">
-            What Our <span className="text-brand-lime">Clients</span> Say
+          <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mt-2">
+            What Our Clients Say
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Hear from businesses that have transformed their operations with our technology solutions
-          </p>
         </div>
 
         {/* Reviews Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {reviews.map((review, index) => (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {reviews.map((review) => (
             <div
               key={review.id}
-              className={`bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-border relative ${
-                review.is_featured ? "lg:scale-105 ring-2 ring-brand-lime/30" : ""
-              }`}
-              style={{ animationDelay: `${index * 100}ms` }}
+              className="bg-background rounded-2xl p-6 border border-border hover:border-[hsl(72,100%,50%)]/30 transition-colors"
             >
-              {/* Quote Icon */}
-              <Quote className="absolute top-4 right-4 w-8 h-8 text-brand-lime/20" />
+              <Quote className="w-8 h-8 text-[hsl(72,100%,50%)]/30 mb-4" />
+              
+              {/* Rating */}
+              {review.rating && (
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star
+                      key={i}
+                      className={`w-4 h-4 ${
+                        i < review.rating
+                          ? "text-[hsl(72,100%,50%)] fill-[hsl(72,100%,50%)]"
+                          : "text-muted"
+                      }`}
+                    />
+                  ))}
+                </div>
+              )}
 
-              {/* Stars */}
-              <div className="flex gap-1 mb-4">{renderStars(review.rating)}</div>
-
-              {/* Review Text */}
-              <p className="text-foreground/80 text-sm leading-relaxed mb-6">
+              <p className="text-muted-foreground mb-6 leading-relaxed line-clamp-4">
                 "{review.review_text}"
               </p>
 
-              {/* Customer Info */}
-              <div className="flex items-center gap-3 pt-4 border-t border-border">
+              <div className="flex items-center gap-3">
                 {review.avatar_url ? (
                   <img
                     src={review.avatar_url}
                     alt={review.customer_name}
-                    className="w-12 h-12 rounded-full object-cover"
+                    className="w-10 h-10 rounded-full object-cover"
                   />
                 ) : (
-                  <div className="w-12 h-12 rounded-full bg-brand-lime/20 flex items-center justify-center text-brand-lime font-semibold text-sm">
-                    {getInitials(review.customer_name)}
+                  <div className="w-10 h-10 rounded-full bg-[hsl(72,100%,50%)]/20 flex items-center justify-center">
+                    <span className="text-[hsl(72,100%,50%)] font-semibold text-sm">
+                      {getInitials(review.customer_name)}
+                    </span>
                   </div>
                 )}
                 <div>
-                  <h4 className="font-semibold text-foreground text-sm">
+                  <div className="font-semibold text-foreground text-sm">
                     {review.customer_name}
-                  </h4>
+                  </div>
                   {(review.customer_designation || review.customer_company) && (
-                    <p className="text-muted-foreground text-xs">
+                    <div className="text-muted-foreground text-xs">
                       {review.customer_designation}
                       {review.customer_designation && review.customer_company && ", "}
                       {review.customer_company}
-                    </p>
+                    </div>
                   )}
                 </div>
               </div>
-
-              {/* Featured Badge */}
-              {review.is_featured && (
-                <div className="absolute -top-2 -left-2 bg-brand-lime text-foreground text-xs font-semibold px-2 py-1 rounded-full">
-                  Featured
-                </div>
-              )}
             </div>
           ))}
         </div>
