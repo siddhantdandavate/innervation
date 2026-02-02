@@ -93,7 +93,7 @@ const CookieConsent = () => {
   if (!showBanner) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-[hsl(220,30%,8%)] border-t border-white/10 p-4 md:p-6 animate-fade-in">
+    <div className="fixed bottom-0 left-0 right-0 z-50 bg-section-dark border-t border-white/10 p-4 md:p-6 animate-fade-in">
       <div className="container-narrow">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="flex-1">
@@ -103,10 +103,10 @@ const CookieConsent = () => {
               You can accept/reject individual cookies or revoke your consent at any time via 'COOKIE SETTINGS'.
             </p>
             <div className="flex gap-4 mt-2">
-              <a href="/privacy" className="text-brand-lime text-sm hover:underline">
+              <a href="/privacy" className="text-accent text-sm hover:underline">
                 Privacy Policy
               </a>
-              <a href="/cookies" className="text-brand-lime text-sm hover:underline">
+              <a href="/cookies" className="text-accent text-sm hover:underline">
                 Cookie Policy
               </a>
             </div>
@@ -115,13 +115,13 @@ const CookieConsent = () => {
             <Button
               onClick={handleDecline}
               variant="outline"
-              className="border-white/50 bg-transparent text-white hover:bg-white/10 hover:text-white px-6"
+              className="border-white/30 bg-white/5 text-white hover:bg-white/10 hover:text-white hover:border-white/50 px-6"
             >
               Cookie Settings
             </Button>
             <Button
               onClick={handleAccept}
-              className="bg-[hsl(72,100%,50%)] text-[hsl(220,20%,10%)] hover:bg-[hsl(72,100%,45%)] font-semibold px-6"
+              className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold px-6"
             >
               Accept All
             </Button>

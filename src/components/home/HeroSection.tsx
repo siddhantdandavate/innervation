@@ -1,46 +1,81 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 
 export const HeroSection = () => {
   return (
-    <section className="relative min-h-[85vh] flex items-center bg-[hsl(220,30%,8%)] overflow-hidden">
-      {/* Background Image Overlay */}
-      <div className="absolute inset-0">
+    <section className="relative min-h-[90vh] flex items-center bg-section-dark overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse-glow" />
+        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: "1.5s" }} />
+        
+        {/* Grid pattern */}
         <div 
-          className="absolute inset-0 bg-cover bg-center opacity-30"
+          className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80')`,
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+            backgroundSize: '60px 60px'
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[hsl(220,30%,8%)] via-[hsl(220,30%,8%)]/80 to-[hsl(220,30%,8%)]/60" />
       </div>
 
       {/* Content */}
       <div className="container-narrow relative z-10 py-20">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
-          <div className="max-w-xl">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-white leading-[1.1] mb-6">
-              Your trusted Technology Partner for{" "}
-              <span className="text-[hsl(72,100%,50%)]">Digital Transformation</span>
-            </h1>
-            <p className="text-lg text-white/70 mb-8 leading-relaxed">
-              We help businesses accelerate growth through innovative IT solutions and digital excellence.
-            </p>
+        <div className="max-w-3xl">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-4 py-2 mb-8">
+            <Sparkles className="w-4 h-4 text-accent" />
+            <span className="text-white/80 text-sm font-medium">Digital Innovation Partner</span>
+          </div>
+
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-white leading-[1.1] mb-6">
+            Your trusted Technology Partner for{" "}
+            <span className="text-accent">Digital Transformation</span>
+          </h1>
+          
+          <p className="text-lg lg:text-xl text-white/70 mb-10 leading-relaxed max-w-2xl">
+            We help businesses accelerate growth through innovative IT solutions and digital excellence.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4">
             <Link to="/contact">
               <Button 
                 size="lg" 
-                className="bg-[hsl(72,100%,50%)] text-[hsl(220,20%,10%)] hover:bg-[hsl(72,100%,45%)] font-semibold px-8 h-14"
+                className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold px-8 h-14 text-base shadow-lg shadow-accent/20"
               >
                 Get Started
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
+            <Link to="/services">
+              <Button 
+                size="lg" 
+                variant="outline"
+                className="border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/30 font-semibold px-8 h-14 text-base"
+              >
+                Explore Services
+              </Button>
+            </Link>
           </div>
 
-          {/* Right - Stats Cards (optional decorative) */}
-          <div className="hidden lg:block" />
+          {/* Trust indicators */}
+          <div className="flex items-center gap-8 mt-12 pt-8 border-t border-white/10">
+            <div>
+              <div className="text-3xl font-heading font-bold text-accent">100+</div>
+              <div className="text-white/50 text-sm">Happy Clients</div>
+            </div>
+            <div className="w-px h-12 bg-white/10" />
+            <div>
+              <div className="text-3xl font-heading font-bold text-accent">150+</div>
+              <div className="text-white/50 text-sm">Projects Delivered</div>
+            </div>
+            <div className="w-px h-12 bg-white/10 hidden sm:block" />
+            <div className="hidden sm:block">
+              <div className="text-3xl font-heading font-bold text-accent">5+</div>
+              <div className="text-white/50 text-sm">Years Experience</div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

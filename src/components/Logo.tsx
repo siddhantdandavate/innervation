@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useTheme } from "@/hooks/use-theme";
 
 interface LogoProps {
   variant?: "default" | "light" | "dark";
@@ -8,6 +9,8 @@ interface LogoProps {
 }
 
 const Logo = ({ variant = "default", showText = true, size = "md", className = "" }: LogoProps) => {
+  const { theme } = useTheme();
+  
   const sizes = {
     sm: { icon: 40, text: "text-lg" },
     md: { icon: 50, text: "text-xl" },
@@ -16,8 +19,17 @@ const Logo = ({ variant = "default", showText = true, size = "md", className = "
 
   const { icon, text } = sizes[size];
 
-  // Color variants based on context
-  const textColor = variant === "light" ? "text-white" : "text-foreground";
+  // Determine text color based on variant and theme
+  const getTextColor = () => {
+    if (variant === "light") return "text-white";
+    if (variant === "dark") return "text-foreground";
+    return "text-foreground";
+  };
+
+  const getSubtextColor = () => {
+    if (variant === "light") return "text-white/70";
+    return "text-muted-foreground";
+  };
 
   return (
     <Link to="/" className={`flex items-center gap-3 group ${className}`}>
@@ -77,10 +89,10 @@ const Logo = ({ variant = "default", showText = true, size = "md", className = "
 
       {showText && (
         <div className="flex flex-col">
-          <span className={`${text} font-heading font-bold tracking-tight leading-tight ${textColor}`}>
+          <span className={`${text} font-heading font-bold tracking-tight leading-tight ${getTextColor()}`}>
             Innervation IT Solutions
           </span>
-          <span className={`text-xs tracking-[0.15em] uppercase ${variant === "light" ? "text-white/70" : "text-muted-foreground"}`}>
+          <span className={`text-xs tracking-[0.15em] uppercase ${getSubtextColor()}`}>
             world of possibilities!
           </span>
         </div>

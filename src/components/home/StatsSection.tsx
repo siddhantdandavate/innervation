@@ -7,15 +7,19 @@ const stats = [
 
 export const StatsSection = () => {
   return (
-    <section className="py-20 bg-[hsl(220,30%,8%)]">
+    <section className="py-20 lg:py-28 bg-section-dark">
       <div className="container-narrow">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {stats.map((stat) => (
-            <div key={stat.label} className="text-center">
-              <div className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-[hsl(72,100%,50%)] mb-2">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
+          {stats.map((stat, index) => (
+            <div 
+              key={stat.label} 
+              className="text-center"
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
+              <div className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-accent mb-2">
                 {stat.value}
               </div>
-              <div className="text-white/70 text-sm md:text-base">
+              <div className="text-white/60 text-sm md:text-base font-medium">
                 {stat.label}
               </div>
             </div>

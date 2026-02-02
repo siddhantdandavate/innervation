@@ -22,7 +22,7 @@ export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[hsl(220,30%,8%)] text-white pt-16 pb-8">
+    <footer className="bg-section-dark text-section-dark-foreground pt-16 pb-8">
       <div className="container-narrow">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Company Info */}
@@ -41,7 +41,7 @@ export const Footer = () => {
                 <li key={link.name}>
                   <Link
                     to={link.href}
-                    className="text-white/60 hover:text-[hsl(72,100%,50%)] transition-colors text-sm"
+                    className="text-white/60 hover:text-accent transition-colors text-sm"
                   >
                     {link.name}
                   </Link>
@@ -58,7 +58,7 @@ export const Footer = () => {
                 <li key={service.name}>
                   <Link
                     to={service.href}
-                    className="text-white/60 hover:text-[hsl(72,100%,50%)] transition-colors text-sm"
+                    className="text-white/60 hover:text-accent transition-colors text-sm"
                   >
                     {service.name}
                   </Link>
@@ -72,25 +72,25 @@ export const Footer = () => {
             <h4 className="text-sm font-semibold uppercase tracking-wider mb-4">Contact</h4>
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-[hsl(72,100%,50%)] shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-accent shrink-0 mt-0.5" />
                 <span className="text-white/60 text-sm">
                   Ravet, Pune, India
                 </span>
               </li>
               <li className="flex items-center gap-3">
-                <Phone className="w-4 h-4 text-[hsl(72,100%,50%)] shrink-0" />
+                <Phone className="w-4 h-4 text-accent shrink-0" />
                 <a
                   href="tel:+919326162104"
-                  className="text-white/60 hover:text-[hsl(72,100%,50%)] transition-colors text-sm"
+                  className="text-white/60 hover:text-accent transition-colors text-sm"
                 >
                   +91 93261 62104
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <Mail className="w-4 h-4 text-[hsl(72,100%,50%)] shrink-0" />
+                <Mail className="w-4 h-4 text-accent shrink-0" />
                 <a
                   href="mailto:info@innervationit.com"
-                  className="text-white/60 hover:text-[hsl(72,100%,50%)] transition-colors text-sm"
+                  className="text-white/60 hover:text-accent transition-colors text-sm"
                 >
                   info@innervationit.com
                 </a>
@@ -101,24 +101,24 @@ export const Footer = () => {
             <div className="flex gap-3 mt-4">
               <a
                 href="#"
-                className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-[hsl(72,100%,50%)] hover:text-[hsl(220,20%,10%)] transition-colors"
+                className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent hover:text-accent-foreground transition-all duration-300"
                 aria-label="LinkedIn"
               >
-                <Linkedin size={14} />
+                <Linkedin size={16} />
               </a>
               <a
                 href="#"
-                className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-[hsl(72,100%,50%)] hover:text-[hsl(220,20%,10%)] transition-colors"
+                className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent hover:text-accent-foreground transition-all duration-300"
                 aria-label="Twitter"
               >
-                <Twitter size={14} />
+                <Twitter size={16} />
               </a>
               <a
                 href="#"
-                className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-[hsl(72,100%,50%)] hover:text-[hsl(220,20%,10%)] transition-colors"
+                className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent hover:text-accent-foreground transition-all duration-300"
                 aria-label="Facebook"
               >
-                <Facebook size={14} />
+                <Facebook size={16} />
               </a>
             </div>
           </div>
