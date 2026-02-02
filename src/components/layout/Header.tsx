@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import Logo from "@/components/Logo";
 
 const navLinks = [
@@ -51,13 +52,13 @@ export const Header = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-white shadow-md py-3"
-          : "bg-[hsl(220,30%,8%)]/95 backdrop-blur-sm py-5"
+          ? "bg-background/95 backdrop-blur-md shadow-md py-3 border-b border-border"
+          : "bg-section-dark/95 backdrop-blur-sm py-5"
       }`}
     >
       <div className="container-narrow">
         <nav className="flex items-center justify-between">
-          <Logo variant="light" size="md" />
+          <Logo variant={isScrolled ? "default" : "light"} size="md" />
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
@@ -87,7 +88,7 @@ export const Header = () => {
                     
                     {/* Dropdown */}
                     <div
-                      className={`absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-border overflow-hidden transition-all duration-200 ${
+                      className={`absolute top-full left-0 mt-2 w-64 bg-popover rounded-lg shadow-xl border border-border overflow-hidden transition-all duration-200 ${
                         isServicesOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2"
                       }`}
                     >
@@ -95,7 +96,7 @@ export const Header = () => {
                         <Link
                           key={sublink.href}
                           to={sublink.href}
-                          className="block px-4 py-3 text-sm text-foreground hover:bg-secondary transition-colors border-b border-border/50 last:border-0"
+                          className="block px-4 py-3 text-sm text-popover-foreground hover:bg-muted transition-colors border-b border-border/50 last:border-0"
                         >
                           {sublink.name}
                         </Link>
@@ -121,13 +122,11 @@ export const Header = () => {
               </div>
             ))}
 
+            <ThemeToggle className={isScrolled ? "text-foreground hover:bg-muted" : "text-white hover:bg-white/10"} />
+
             <Link to="/contact">
               <Button 
-                className={`font-semibold transition-all ${
-                  isScrolled 
-                    ? "bg-foreground text-background hover:bg-foreground/90" 
-                    : "bg-white text-foreground hover:bg-white/90"
-                }`}
+                className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold shadow-md"
               >
                 Get in Touch
               </Button>
@@ -135,27 +134,30 @@ export const Header = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            className={`lg:hidden p-2 ${isScrolled ? "text-foreground" : "text-white"}`}
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="flex items-center gap-3 lg:hidden">
+            <ThemeToggle className={isScrolled ? "text-foreground hover:bg-muted" : "text-white hover:bg-white/10"} />
+            <button
+              className={`p-2 ${isScrolled ? "text-foreground" : "text-white"}`}
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </nav>
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
           <div className="lg:hidden mt-4 pb-4 animate-fade-in">
-            <div className="bg-white rounded-lg shadow-xl border border-border p-4 space-y-2">
+            <div className="bg-popover rounded-lg shadow-xl border border-border p-4 space-y-2">
               {navLinks.map((link) => (
                 <div key={link.name}>
                   <Link
                     to={link.href}
                     className={`block px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
                       isActive(link.href)
-                        ? "bg-secondary text-foreground"
-                        : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                        ? "bg-muted text-foreground"
+                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
                     }`}
                   >
                     {link.name}
@@ -177,7 +179,7 @@ export const Header = () => {
               ))}
               <div className="pt-2">
                 <Link to="/contact" className="block">
-                  <Button className="w-full bg-foreground text-background hover:bg-foreground/90">
+                  <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-semibold">
                     Get in Touch
                   </Button>
                 </Link>

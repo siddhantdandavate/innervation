@@ -51,7 +51,7 @@ const CustomerReviews = () => {
 
   if (loading) {
     return (
-      <section className="py-20 bg-muted/30">
+      <section className="py-20 lg:py-28 bg-muted/30">
         <div className="container-narrow">
           <div className="text-center">
             <p className="text-muted-foreground">Loading reviews...</p>
@@ -66,14 +66,14 @@ const CustomerReviews = () => {
   }
 
   return (
-    <section className="py-20 bg-muted/30">
+    <section className="py-20 lg:py-28 bg-muted/30">
       <div className="container-narrow">
         {/* Section Header */}
-        <div className="text-center mb-12">
-          <span className="text-muted-foreground text-sm uppercase tracking-wider">
+        <div className="text-center mb-14">
+          <span className="text-accent text-sm font-semibold uppercase tracking-wider">
             Testimonials
           </span>
-          <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mt-2">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-foreground mt-3">
             What Our Clients Say
           </h2>
         </div>
@@ -83,9 +83,9 @@ const CustomerReviews = () => {
           {reviews.map((review) => (
             <div
               key={review.id}
-              className="bg-background rounded-2xl p-6 border border-border hover:border-[hsl(72,100%,50%)]/30 transition-colors"
+              className="bg-background rounded-2xl p-6 lg:p-8 border border-border hover:border-accent/30 hover:shadow-lg transition-all duration-300"
             >
-              <Quote className="w-8 h-8 text-[hsl(72,100%,50%)]/30 mb-4" />
+              <Quote className="w-10 h-10 text-accent/20 mb-4" />
               
               {/* Rating */}
               {review.rating && (
@@ -93,9 +93,9 @@ const CustomerReviews = () => {
                   {[...Array(5)].map((_, i) => (
                     <Star
                       key={i}
-                      className={`w-4 h-4 ${
+                      className={`w-5 h-5 ${
                         i < review.rating
-                          ? "text-[hsl(72,100%,50%)] fill-[hsl(72,100%,50%)]"
+                          ? "text-accent fill-accent"
                           : "text-muted"
                       }`}
                     />
@@ -103,30 +103,30 @@ const CustomerReviews = () => {
                 </div>
               )}
 
-              <p className="text-muted-foreground mb-6 leading-relaxed line-clamp-4">
+              <p className="text-muted-foreground mb-6 leading-relaxed line-clamp-4 text-base">
                 "{review.review_text}"
               </p>
 
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-4 pt-4 border-t border-border">
                 {review.avatar_url ? (
                   <img
                     src={review.avatar_url}
                     alt={review.customer_name}
-                    className="w-10 h-10 rounded-full object-cover"
+                    className="w-12 h-12 rounded-full object-cover"
                   />
                 ) : (
-                  <div className="w-10 h-10 rounded-full bg-[hsl(72,100%,50%)]/20 flex items-center justify-center">
-                    <span className="text-[hsl(72,100%,50%)] font-semibold text-sm">
+                  <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center">
+                    <span className="text-accent font-semibold">
                       {getInitials(review.customer_name)}
                     </span>
                   </div>
                 )}
                 <div>
-                  <div className="font-semibold text-foreground text-sm">
+                  <div className="font-semibold text-foreground">
                     {review.customer_name}
                   </div>
                   {(review.customer_designation || review.customer_company) && (
-                    <div className="text-muted-foreground text-xs">
+                    <div className="text-muted-foreground text-sm">
                       {review.customer_designation}
                       {review.customer_designation && review.customer_company && ", "}
                       {review.customer_company}
