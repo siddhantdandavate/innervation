@@ -20,6 +20,7 @@ const navLinks = [
       { name: "Social Media Marketing", href: "/services/social-media" },
     ],
   },
+  { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" },
 ];
 
