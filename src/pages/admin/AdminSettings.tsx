@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import AdminLayout from '@/components/admin/AdminLayout';
 import { cmsAdminApi } from '@/lib/cms';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
-import { Save, Loader2, Eye, EyeOff } from 'lucide-react';
+import { Save, Loader2, Eye, EyeOff, Shield, Info, ExternalLink } from 'lucide-react';
 
 export default function AdminSettings() {
   const [currentPassword, setCurrentPassword] = useState('');
@@ -68,51 +68,63 @@ export default function AdminSettings() {
   return (
     <AdminLayout title="Settings">
       <div className="space-y-6 max-w-xl">
-        <Card>
-          <CardHeader>
-            <CardTitle>Change Password</CardTitle>
+        {/* Change Password Card */}
+        <Card className="border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800">
+          <CardHeader className="border-b border-slate-100 dark:border-slate-700">
+            <div className="flex items-center gap-2">
+              <Shield className="w-5 h-5 text-blue-600" />
+              <CardTitle className="text-lg text-slate-900 dark:text-white">Change Password</CardTitle>
+            </div>
+            <CardDescription className="text-slate-500">
+              Update your admin password for security
+            </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-4 pt-6">
             <div className="space-y-2">
-              <label className="text-sm font-medium">Current Password</label>
-              <div className="relative">
-                <Input
-                  type={showPasswords ? 'text' : 'password'}
-                  value={currentPassword}
-                  onChange={(e) => setCurrentPassword(e.target.value)}
-                  placeholder="Enter current password"
-                />
-              </div>
+              <label className="text-sm font-medium text-slate-700 dark:text-slate-200">Current Password</label>
+              <Input
+                type={showPasswords ? 'text' : 'password'}
+                value={currentPassword}
+                onChange={(e) => setCurrentPassword(e.target.value)}
+                placeholder="Enter current password"
+                className="border-slate-200"
+              />
             </div>
             <div className="space-y-2">
-              <label className="text-sm font-medium">New Password</label>
+              <label className="text-sm font-medium text-slate-700 dark:text-slate-200">New Password</label>
               <Input
                 type={showPasswords ? 'text' : 'password'}
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                placeholder="Enter new password"
+                placeholder="Enter new password (min 6 characters)"
+                className="border-slate-200"
               />
             </div>
             <div className="space-y-2">
-              <label className="text-sm font-medium">Confirm New Password</label>
+              <label className="text-sm font-medium text-slate-700 dark:text-slate-200">Confirm New Password</label>
               <Input
                 type={showPasswords ? 'text' : 'password'}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="Confirm new password"
+                className="border-slate-200"
               />
             </div>
             <div className="flex items-center gap-2">
               <button
                 type="button"
                 onClick={() => setShowPasswords(!showPasswords)}
-                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
+                className="flex items-center gap-2 text-sm text-slate-500 hover:text-slate-700"
               >
                 {showPasswords ? <EyeOff size={16} /> : <Eye size={16} />}
                 {showPasswords ? 'Hide' : 'Show'} passwords
               </button>
             </div>
-            <Button onClick={handleChangePassword} disabled={saving}>
+            <Button 
+              onClick={handleChangePassword} 
+              disabled={saving}
+              className="bg-blue-600 hover:bg-blue-700 text-white"
+            >
               {saving ? (
                 <Loader2 className="w-4 h-4 animate-spin mr-2" />
               ) : (
@@ -123,29 +135,34 @@ export default function AdminSettings() {
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>CMS Information</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2 text-sm">
-            <div className="flex justify-between py-2 border-b">
-              <span className="text-muted-foreground">Version</span>
-              <span>1.0.0</span>
+        {/* CMS Information Card */}
+        <Card className="border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800">
+          <CardHeader className="border-b border-slate-100 dark:border-slate-700">
+            <div className="flex items-center gap-2">
+              <Info className="w-5 h-5 text-slate-600" />
+              <CardTitle className="text-lg text-slate-900 dark:text-white">CMS Information</CardTitle>
             </div>
-            <div className="flex justify-between py-2 border-b">
-              <span className="text-muted-foreground">Website</span>
+          </CardHeader>
+          <CardContent className="space-y-0 pt-4">
+            <div className="flex justify-between py-3 border-b border-slate-100 dark:border-slate-700">
+              <span className="text-slate-500">Version</span>
+              <span className="font-medium text-slate-900 dark:text-white">1.0.0</span>
+            </div>
+            <div className="flex justify-between py-3 border-b border-slate-100 dark:border-slate-700">
+              <span className="text-slate-500">Website</span>
               <a
                 href="/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary hover:underline"
+                className="text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1"
               >
                 View Website
+                <ExternalLink className="w-3 h-3" />
               </a>
             </div>
-            <div className="flex justify-between py-2">
-              <span className="text-muted-foreground">Storage</span>
-              <span>Cloud Database</span>
+            <div className="flex justify-between py-3">
+              <span className="text-slate-500">Storage</span>
+              <span className="font-medium text-slate-900 dark:text-white">Cloud Database</span>
             </div>
           </CardContent>
         </Card>
