@@ -40,14 +40,43 @@ export function CMSProvider({ children }: { children: ReactNode }) {
       const themeData = await cms.getTheme();
       setTheme(themeData);
       
-      // Apply theme colors to CSS variables
+      // Apply theme colors to CSS variables for BOTH light and dark modes
       if (themeData?.colors) {
         const root = document.documentElement;
+        const style = document.createElement('style');
+        style.id = 'cms-theme-variables';
+        
+        // Remove existing CMS theme style if present
+        const existingStyle = document.getElementById('cms-theme-variables');
+        if (existingStyle) {
+          existingStyle.remove();
+        }
+        
+        // Build CSS for light mode colors
+        const lightModeVars: string[] = [];
+        const darkModeVars: string[] = [];
+        
         Object.entries(themeData.colors).forEach(([key, value]) => {
-          if (!key.includes('_dark')) {
-            root.style.setProperty(`--${key}`, value);
+          if (key.includes('_dark')) {
+            // Dark mode variable - map to correct CSS var name
+            const cssVarName = key.replace('_dark', '');
+            darkModeVars.push(`--${cssVarName}: ${value};`);
+          } else {
+            lightModeVars.push(`--${key}: ${value};`);
           }
         });
+        
+        // Create comprehensive CSS that updates all theme variables
+        style.textContent = `
+          :root {
+            ${lightModeVars.join('\n            ')}
+          }
+          .dark {
+            ${darkModeVars.join('\n            ')}
+          }
+        `;
+        
+        document.head.appendChild(style);
       }
     } catch (err) {
       console.error('Failed to load CMS theme:', err);
