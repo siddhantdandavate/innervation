@@ -152,3 +152,25 @@ export function useCMSContent<T = Record<string, unknown>>(sectionKey: string): 
     loading,
   };
 }
+
+// Helper hook for getting content with fallback values
+export function useCMSContentWithFallback<T extends Record<string, unknown>>(
+  sectionKey: string,
+  fallback: T
+): { content: T; loading: boolean } {
+  const { getContent, loading } = useCMS();
+  const cmsContent = getContent(sectionKey) as Partial<T> | null;
+  
+  // Merge CMS content with fallback, preferring CMS values when they exist
+  const content: T = { ...fallback };
+  if (cmsContent) {
+    (Object.keys(fallback) as Array<keyof T>).forEach((key) => {
+      const cmsValue = cmsContent[key];
+      if (cmsValue !== undefined && cmsValue !== '') {
+        content[key] = cmsValue as T[keyof T];
+      }
+    });
+  }
+  
+  return { content, loading };
+}
