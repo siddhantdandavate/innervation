@@ -61,6 +61,12 @@ export default {
           "dark-foreground": "hsl(var(--section-dark-foreground))",
           muted: "hsl(var(--section-muted))",
         },
+        brand: {
+          primary: "hsl(var(--brand-primary))",
+          "primary-light": "hsl(var(--brand-primary-light))",
+          secondary: "hsl(var(--brand-secondary))",
+          "secondary-light": "hsl(var(--brand-secondary-light))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",

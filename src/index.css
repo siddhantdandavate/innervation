@@ -3,55 +3,51 @@
 @tailwind utilities;
 
 /* Innervation IT Solutions - Professional Theme System */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+/* Fonts loaded via index.html with preload for performance */
 
 @layer base {
   :root {
     /* === LIGHT THEME === */
-    /* Primary - Deep navy for professional look */
     --primary: 222 47% 11%;
     --primary-foreground: 210 40% 98%;
     
-    /* Secondary - Warm gray */
     --secondary: 210 40% 96%;
     --secondary-foreground: 222 47% 11%;
     
-    /* Accent - Electric lime (brand accent) */
     --accent: 75 100% 45%;
     --accent-foreground: 222 47% 11%;
     
-    /* Background - Clean white */
     --background: 0 0% 100%;
     --foreground: 222 47% 11%;
     
-    /* Cards - Subtle warm white */
     --card: 210 40% 98%;
     --card-foreground: 222 47% 11%;
     
-    /* Popover */
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
     
-    /* Muted - Soft gray */
     --muted: 210 40% 96%;
     --muted-foreground: 215 16% 47%;
     
-    /* Borders */
     --border: 214 32% 91%;
     --input: 214 32% 91%;
     --ring: 75 100% 45%;
     
-    /* Destructive */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
     
-    /* Radius */
     --radius: 0.75rem;
     
     /* Section backgrounds */
     --section-dark: 222 47% 11%;
     --section-dark-foreground: 210 40% 98%;
     --section-muted: 210 40% 97%;
+    
+    /* Theme-aware brand colors (used by logo SVG) */
+    --brand-primary: 200 100% 40%;
+    --brand-primary-light: 200 100% 47%;
+    --brand-secondary: 0 60% 50%;
+    --brand-secondary-light: 0 60% 55%;
     
     /* Shadows */
     --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.03);
@@ -72,40 +68,31 @@
 
   .dark {
     /* === DARK THEME === */
-    /* Primary - White for contrast */
     --primary: 210 40% 98%;
     --primary-foreground: 222 47% 11%;
     
-    /* Secondary - Dark slate */
     --secondary: 222 47% 16%;
     --secondary-foreground: 210 40% 98%;
     
-    /* Accent - Electric lime stays vibrant */
     --accent: 75 100% 50%;
     --accent-foreground: 222 47% 11%;
     
-    /* Background - Deep navy */
     --background: 222 47% 8%;
     --foreground: 210 40% 98%;
     
-    /* Cards - Slightly lighter navy */
     --card: 222 47% 11%;
     --card-foreground: 210 40% 98%;
     
-    /* Popover */
     --popover: 222 47% 11%;
     --popover-foreground: 210 40% 98%;
     
-    /* Muted */
     --muted: 222 47% 16%;
     --muted-foreground: 215 20% 65%;
     
-    /* Borders */
     --border: 222 30% 20%;
     --input: 222 30% 20%;
     --ring: 75 100% 50%;
     
-    /* Destructive */
     --destructive: 0 62% 50%;
     --destructive-foreground: 0 0% 100%;
     
@@ -114,7 +101,13 @@
     --section-dark-foreground: 210 40% 98%;
     --section-muted: 222 47% 11%;
     
-    /* Shadows - More pronounced in dark mode */
+    /* Theme-aware brand colors (brighter in dark mode) */
+    --brand-primary: 200 100% 50%;
+    --brand-primary-light: 200 100% 60%;
+    --brand-secondary: 0 65% 55%;
+    --brand-secondary-light: 0 65% 62%;
+    
+    /* Shadows */
     --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.3);
     --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.4), 0 2px 4px -2px hsl(0 0% 0% / 0.3);
     --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.5), 0 4px 6px -4px hsl(0 0% 0% / 0.4);
@@ -142,7 +135,22 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased transition-colors duration-300;
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  /* Smooth theme transitions on all themed elements */
+  body,
+  body * {
+    transition-property: color, background-color, border-color, box-shadow, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
+  }
+
+  /* Disable transitions on animations and transforms to prevent jank */
+  [class*="animate-"],
+  [class*="transition-transform"],
+  [class*="transition-all"] {
+    transition-property: all;
   }
 
   h1, h2, h3, h4, h5, h6 {
