@@ -69,14 +69,22 @@ export const cmsAdmin = {
   isLoggedIn: () => !!sessionStorage.getItem(ADMIN_TOKEN_KEY),
 };
 
-// API helper for admin operations
+// API helper for admin operations - sends token in headers
 async function adminApi(action: string, params: Record<string, unknown> = {}) {
+  const token = cmsAdmin.getToken();
+
   const { data, error } = await supabase.functions.invoke('cms-admin', {
     body: { action, ...params },
+    headers: token ? { 'x-admin-token': token } : undefined,
   });
 
   if (error) throw error;
-  if (data.error) throw new Error(data.error);
+  if (data.error) {
+    if (data.error.includes('Unauthorized') || data.error.includes('invalid or expired token')) {
+      cmsAdmin.clearToken();
+    }
+    throw new Error(data.error);
+  }
   return data;
 }
 
@@ -177,6 +185,14 @@ export const cmsAdminApi = {
       cmsAdmin.setToken(result.token);
     }
     return result;
+  },
+
+  async logout(): Promise<void> {
+    try {
+      await adminApi('logout');
+    } finally {
+      cmsAdmin.clearToken();
+    }
   },
 
   async changePassword(currentPassword: string, newPassword: string): Promise<void> {
