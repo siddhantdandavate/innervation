@@ -1,5 +1,4 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
-import * as bcrypt from 'https://deno.land/x/bcrypt@v0.4.1/mod.ts'
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -119,24 +118,51 @@ function validateThemeColors(colors: unknown): Record<string, string> {
 }
 
 // ============================================
-// PASSWORD HASHING (BCRYPT)
+// PASSWORD HASHING (PBKDF2 — no Worker dependency)
 // ============================================
 
+const PBKDF2_ITERATIONS = 100000
+const SALT_LENGTH = 16
+const KEY_LENGTH = 32
+
 async function hashPassword(password: string): Promise<string> {
-  return await bcrypt.hash(password)
+  const salt = crypto.getRandomValues(new Uint8Array(SALT_LENGTH))
+  const key = await crypto.subtle.importKey(
+    'raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveBits']
+  )
+  const derived = await crypto.subtle.deriveBits(
+    { name: 'PBKDF2', salt, iterations: PBKDF2_ITERATIONS, hash: 'SHA-256' },
+    key, KEY_LENGTH * 8
+  )
+  const saltHex = Array.from(salt).map(b => b.toString(16).padStart(2, '0')).join('')
+  const hashHex = Array.from(new Uint8Array(derived)).map(b => b.toString(16).padStart(2, '0')).join('')
+  return `pbkdf2:${PBKDF2_ITERATIONS}:${saltHex}:${hashHex}`
 }
 
-async function verifyPassword(password: string, hash: string): Promise<boolean> {
+async function verifyPassword(password: string, storedHash: string): Promise<boolean> {
   try {
-    return await bcrypt.compare(password, hash)
-  } catch {
+    if (storedHash.startsWith('pbkdf2:')) {
+      const [, iterStr, saltHex, hashHex] = storedHash.split(':')
+      const iterations = parseInt(iterStr)
+      const salt = new Uint8Array(saltHex.match(/.{2}/g)!.map(b => parseInt(b, 16)))
+      const key = await crypto.subtle.importKey(
+        'raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveBits']
+      )
+      const derived = await crypto.subtle.deriveBits(
+        { name: 'PBKDF2', salt, iterations, hash: 'SHA-256' }, key, KEY_LENGTH * 8
+      )
+      const computedHex = Array.from(new Uint8Array(derived)).map(b => b.toString(16).padStart(2, '0')).join('')
+      return computedHex === hashHex
+    }
     // Fallback: check old SHA-256 hashes for migration
     const encoder = new TextEncoder()
     const data = encoder.encode(password + 'innervation_salt_2024')
     const hashBuffer = await crypto.subtle.digest('SHA-256', data)
     const hashArray = Array.from(new Uint8Array(hashBuffer))
     const oldHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('')
-    return oldHash === hash
+    return oldHash === storedHash
+  } catch {
+    return false
   }
 }
 
@@ -298,8 +324,8 @@ Deno.serve(async (req) => {
           )
         }
 
-        // Auto-upgrade old SHA-256 hash to bcrypt on successful login
-        if (!admin.admin_password_hash.startsWith('$2')) {
+        // Auto-upgrade old SHA-256 hash to PBKDF2 on successful login
+        if (!admin.admin_password_hash.startsWith('pbkdf2:')) {
           const newHash = await hashPassword(password)
           await supabase.from('cms_admin_settings').update({ admin_password_hash: newHash }).eq('id', admin.id)
         }
