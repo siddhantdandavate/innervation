@@ -79,13 +79,13 @@ export const Header = () => {
                             ? "text-foreground"
                             : "text-muted-foreground hover:text-foreground"
                           : isActive(link.href)
-                            ? "text-white"
-                            : "text-white/80 hover:text-white"
+                            ? "text-section-dark-foreground"
+                            : "text-section-dark-foreground/80 hover:text-section-dark-foreground"
                       }`}
                     >
                       {link.name}
                     </Link>
-                    <ChevronDown size={14} className={isScrolled ? "text-muted-foreground" : "text-white/80"} />
+                    <ChevronDown size={14} className={isScrolled ? "text-muted-foreground" : "text-section-dark-foreground/80"} />
                     
                     {/* Dropdown */}
                     <div
@@ -113,8 +113,8 @@ export const Header = () => {
                           ? "text-foreground"
                           : "text-muted-foreground hover:text-foreground"
                         : isActive(link.href)
-                          ? "text-white"
-                          : "text-white/80 hover:text-white"
+                          ? "text-section-dark-foreground"
+                          : "text-section-dark-foreground/80 hover:text-section-dark-foreground"
                     }`}
                   >
                     {link.name}
@@ -123,7 +123,7 @@ export const Header = () => {
               </div>
             ))}
 
-            <ThemeToggle className={isScrolled ? "text-foreground hover:bg-muted" : "text-white hover:bg-white/10"} />
+            <ThemeToggle className={isScrolled ? "text-foreground hover:bg-muted" : "text-section-dark-foreground hover:bg-section-dark-foreground/10"} />
 
             <Link to="/contact">
               <Button 
@@ -136,9 +136,9 @@ export const Header = () => {
 
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-3 lg:hidden">
-            <ThemeToggle className={isScrolled ? "text-foreground hover:bg-muted" : "text-white hover:bg-white/10"} />
+            <ThemeToggle className={isScrolled ? "text-foreground hover:bg-muted" : "text-section-dark-foreground hover:bg-section-dark-foreground/10"} />
             <button
-              className={`p-2 ${isScrolled ? "text-foreground" : "text-white"}`}
+              className={`p-2 ${isScrolled ? "text-foreground" : "text-section-dark-foreground"}`}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
             >

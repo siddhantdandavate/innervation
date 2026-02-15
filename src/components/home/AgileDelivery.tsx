@@ -13,7 +13,7 @@ export const AgileDelivery = () => {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-6 leading-tight">
             Agile Delivery Mindset
           </h2>
-          <p className="text-white/70 text-lg mb-8 max-w-md leading-relaxed">
+          <p className="text-section-dark-foreground/70 text-lg mb-8 max-w-md leading-relaxed">
             We deliver projects with speed and precision using modern agile methodologies that ensure transparency and rapid iteration.
           </p>
           <Link 
