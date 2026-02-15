@@ -8,7 +8,6 @@ const CookieConsent = () => {
   const [visitorId, setVisitorId] = useState<string | null>(null);
 
   useEffect(() => {
-    // Check if consent was already given
     const consent = localStorage.getItem("cookie-consent");
     let storedVisitorId = localStorage.getItem("visitor-id");
 
@@ -22,7 +21,6 @@ const CookieConsent = () => {
       setShowBanner(true);
     }
 
-    // Track visitor
     trackVisitor(storedVisitorId, consent === "accepted");
   }, []);
 
@@ -93,11 +91,11 @@ const CookieConsent = () => {
   if (!showBanner) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-section-dark border-t border-white/10 p-4 md:p-6 animate-fade-in">
+    <div className="fixed bottom-0 left-0 right-0 z-50 bg-section-dark border-t border-section-dark-foreground/10 p-4 md:p-6 animate-fade-in">
       <div className="container-narrow">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="flex-1">
-            <p className="text-white/90 text-sm leading-relaxed">
+            <p className="text-section-dark-foreground/90 text-sm leading-relaxed">
               This website uses both Innervation IT Solutions and third-party cookies, including essential, 
               functional and performance cookies. If you choose 'ACCEPT ALL' you consent to the use of all cookies. 
               You can accept/reject individual cookies or revoke your consent at any time via 'COOKIE SETTINGS'.
@@ -115,7 +113,7 @@ const CookieConsent = () => {
             <Button
               onClick={handleDecline}
               variant="outline"
-              className="border-white/30 bg-white/5 text-white hover:bg-white/10 hover:text-white hover:border-white/50 px-6"
+              className="border-section-dark-foreground/30 bg-section-dark-foreground/5 text-section-dark-foreground hover:bg-section-dark-foreground/10 hover:text-section-dark-foreground hover:border-section-dark-foreground/50 px-6"
             >
               Cookie Settings
             </Button>

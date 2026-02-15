@@ -29,7 +29,7 @@ export const Footer = () => {
           {/* Company Info */}
           <div>
             <Logo variant="light" size="md" className="mb-6" />
-            <p className="text-white/60 text-sm leading-relaxed">
+            <p className="text-section-dark-foreground/60 text-sm leading-relaxed">
               Your trusted technology partner for digital transformation.
             </p>
           </div>
@@ -42,7 +42,7 @@ export const Footer = () => {
                 <li key={link.name}>
                   <Link
                     to={link.href}
-                    className="text-white/60 hover:text-accent transition-colors text-sm"
+                    className="text-section-dark-foreground/60 hover:text-accent transition-colors text-sm"
                   >
                     {link.name}
                   </Link>
@@ -59,7 +59,7 @@ export const Footer = () => {
                 <li key={service.name}>
                   <Link
                     to={service.href}
-                    className="text-white/60 hover:text-accent transition-colors text-sm"
+                    className="text-section-dark-foreground/60 hover:text-accent transition-colors text-sm"
                   >
                     {service.name}
                   </Link>
@@ -74,7 +74,7 @@ export const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                <span className="text-white/60 text-sm">
+                <span className="text-section-dark-foreground/60 text-sm">
                   Ravet, Pune, India
                 </span>
               </li>
@@ -82,7 +82,7 @@ export const Footer = () => {
                 <Phone className="w-4 h-4 text-accent shrink-0" />
                 <a
                   href="tel:+919326162104"
-                  className="text-white/60 hover:text-accent transition-colors text-sm"
+                  className="text-section-dark-foreground/60 hover:text-accent transition-colors text-sm"
                 >
                   +91 93261 62104
                 </a>
@@ -91,7 +91,7 @@ export const Footer = () => {
                 <Mail className="w-4 h-4 text-accent shrink-0" />
                 <a
                   href="mailto:info@innervationit.com"
-                  className="text-white/60 hover:text-accent transition-colors text-sm"
+                  className="text-section-dark-foreground/60 hover:text-accent transition-colors text-sm"
                 >
                   info@innervationit.com
                 </a>
@@ -102,21 +102,21 @@ export const Footer = () => {
             <div className="flex gap-3 mt-4">
               <a
                 href="#"
-                className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent hover:text-accent-foreground transition-all duration-300"
+                className="w-9 h-9 rounded-full bg-section-dark-foreground/10 flex items-center justify-center hover:bg-accent hover:text-accent-foreground transition-all duration-300"
                 aria-label="LinkedIn"
               >
                 <Linkedin size={16} />
               </a>
               <a
                 href="#"
-                className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent hover:text-accent-foreground transition-all duration-300"
+                className="w-9 h-9 rounded-full bg-section-dark-foreground/10 flex items-center justify-center hover:bg-accent hover:text-accent-foreground transition-all duration-300"
                 aria-label="Twitter"
               >
                 <Twitter size={16} />
               </a>
               <a
                 href="#"
-                className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent hover:text-accent-foreground transition-all duration-300"
+                className="w-9 h-9 rounded-full bg-section-dark-foreground/10 flex items-center justify-center hover:bg-accent hover:text-accent-foreground transition-all duration-300"
                 aria-label="Facebook"
               >
                 <Facebook size={16} />
@@ -126,16 +126,16 @@ export const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/10 pt-8">
+        <div className="border-t border-section-dark-foreground/10 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-white/40 text-sm">
+            <p className="text-section-dark-foreground/40 text-sm">
               © {currentYear} Innervation IT Solutions. All rights reserved.
             </p>
             <div className="flex gap-6">
-              <Link to="/privacy" className="text-white/40 hover:text-white/70 text-sm transition-colors">
+              <Link to="/privacy" className="text-section-dark-foreground/40 hover:text-section-dark-foreground/70 text-sm transition-colors">
                 Privacy Policy
               </Link>
-              <Link to="/terms" className="text-white/40 hover:text-white/70 text-sm transition-colors">
+              <Link to="/terms" className="text-section-dark-foreground/40 hover:text-section-dark-foreground/70 text-sm transition-colors">
                 Terms of Service
               </Link>
             </div>

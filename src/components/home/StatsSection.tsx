@@ -19,7 +19,7 @@ export const StatsSection = () => {
               <div className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-accent mb-2">
                 {stat.value}
               </div>
-              <div className="text-white/60 text-sm md:text-base font-medium">
+              <div className="text-section-dark-foreground/60 text-sm md:text-base font-medium">
                 {stat.label}
               </div>
             </div>
