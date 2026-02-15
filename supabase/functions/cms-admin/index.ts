@@ -30,14 +30,54 @@ function validateObject(value: unknown, fieldName: string): Record<string, unkno
   return value as Record<string, unknown>
 }
 
+// Allowlist-based HTML sanitizer — only permitted tags/attributes survive
+const ALLOWED_TAGS = new Set([
+  'p', 'br', 'strong', 'em', 'u', 'b', 'i', 's', 'del', 'ins', 'sub', 'sup',
+  'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+  'ul', 'ol', 'li', 'blockquote', 'pre', 'code',
+  'a', 'img', 'figure', 'figcaption',
+  'table', 'thead', 'tbody', 'tr', 'th', 'td',
+  'div', 'span', 'hr',
+])
+const ALLOWED_ATTRS: Record<string, Set<string>> = {
+  'a': new Set(['href', 'title', 'target', 'rel']),
+  'img': new Set(['src', 'alt', 'title', 'width', 'height', 'loading']),
+  '*': new Set(['class', 'id']),
+}
+const DANGEROUS_URL_RE = /^\s*(javascript|data|vbscript)\s*:/i
+
 function sanitizeHtml(html: string): string {
-  return html
-    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
-    .replace(/on\w+\s*=\s*["'][^"']*["']/gi, '')
-    .replace(/javascript:/gi, '')
-    .replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi, '')
-    .replace(/<embed\b[^>]*>/gi, '')
-    .replace(/<object\b[^<]*(?:(?!<\/object>)<[^<]*)*<\/object>/gi, '')
+  // Step 1: Strip all event handlers (any attribute starting with "on")
+  let clean = html.replace(/<([a-zA-Z][a-zA-Z0-9]*)\b([^>]*)>/g, (_match, tag: string, attrs: string) => {
+    const tagLower = tag.toLowerCase()
+    if (!ALLOWED_TAGS.has(tagLower)) return '' // Strip disallowed opening tags
+    const allowedForTag = ALLOWED_ATTRS[tagLower] || new Set()
+    const globalAttrs = ALLOWED_ATTRS['*']
+    // Parse and filter attributes
+    const safeAttrs: string[] = []
+    const attrRegex = /([a-zA-Z][a-zA-Z0-9_-]*)\s*=\s*(?:"([^"]*)"|'([^']*)'|(\S+))/g
+    let m: RegExpExecArray | null
+    while ((m = attrRegex.exec(attrs)) !== null) {
+      const attrName = m[1].toLowerCase()
+      const attrValue = m[2] ?? m[3] ?? m[4] ?? ''
+      // Block all event handlers
+      if (attrName.startsWith('on')) continue
+      // Only allow whitelisted attributes
+      if (!allowedForTag.has(attrName) && !globalAttrs.has(attrName)) continue
+      // Block dangerous URLs in href/src
+      if ((attrName === 'href' || attrName === 'src') && DANGEROUS_URL_RE.test(attrValue)) continue
+      safeAttrs.push(`${attrName}="${attrValue.replace(/"/g, '&quot;')}"`)
+    }
+    return `<${tagLower}${safeAttrs.length ? ' ' + safeAttrs.join(' ') : ''}>`
+  })
+  // Step 2: Strip disallowed closing tags
+  clean = clean.replace(/<\/([a-zA-Z][a-zA-Z0-9]*)>/g, (_match, tag: string) => {
+    return ALLOWED_TAGS.has(tag.toLowerCase()) ? `</${tag.toLowerCase()}>` : ''
+  })
+  // Step 3: Remove any remaining script/iframe/object/embed blocks that slipped through
+  clean = clean.replace(/<(script|iframe|object|embed|applet|form|input|textarea|select|button)\b[^]*?<\/\1>/gi, '')
+  clean = clean.replace(/<(script|iframe|object|embed|applet|form|input|textarea|select|button)\b[^>]*\/?>/gi, '')
+  return clean
 }
 
 function validateSlug(title: string): string {
