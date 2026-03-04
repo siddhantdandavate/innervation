@@ -400,12 +400,26 @@ Deno.serve(async (req) => {
       case 'update-content': {
         const sectionKey = validateString(params.sectionKey, 'sectionKey', 1, 100)
         const content = validateObject(params.content, 'content')
-        const { data: current } = await supabase.from('cms_content').select('*').eq('section_key', sectionKey).single()
-        const { data, error } = await supabase.from('cms_content').update({ content }).eq('section_key', sectionKey).select().single()
-        if (error) throw error
+        // Fetch current row for history (may not exist yet)
+        const { data: current } = await supabase.from('cms_content').select('*').eq('section_key', sectionKey).maybeSingle()
+        let data
+        let error
+        if (current) {
+          // Update existing
+          const res = await supabase.from('cms_content').update({ content }).eq('section_key', sectionKey).select().single()
+          data = res.data; error = res.error
+        } else {
+          // Insert new
+          const res = await supabase.from('cms_content').insert({ section_key: sectionKey, content }).select().single()
+          data = res.data; error = res.error
+        }
+        if (error) {
+          console.error('update-content error:', JSON.stringify(error))
+          throw error
+        }
         await supabase.from('cms_history').insert({
-          entity_type: 'content', entity_id: data.id, action: 'update',
-          previous_data: current, new_data: data, description: `Updated ${sectionKey} content`
+          entity_type: 'content', entity_id: data.id, action: current ? 'update' : 'create',
+          previous_data: current, new_data: data, description: `${current ? 'Updated' : 'Created'} ${sectionKey} content`
         })
         return new Response(JSON.stringify({ data }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
       }
@@ -419,11 +433,21 @@ Deno.serve(async (req) => {
 
       case 'update-theme': {
         const colors = validateThemeColors(params.colors)
-        const { data: current } = await supabase.from('cms_theme').select('*').eq('is_active', true).single()
-        const { data, error } = await supabase.from('cms_theme').update({ colors }).eq('is_active', true).select().single()
-        if (error) throw error
+        const { data: current } = await supabase.from('cms_theme').select('*').eq('is_active', true).maybeSingle()
+        let data, error
+        if (current) {
+          const res = await supabase.from('cms_theme').update({ colors }).eq('is_active', true).select().single()
+          data = res.data; error = res.error
+        } else {
+          const res = await supabase.from('cms_theme').insert({ colors, is_active: true, theme_name: 'default' }).select().single()
+          data = res.data; error = res.error
+        }
+        if (error) {
+          console.error('update-theme error:', JSON.stringify(error))
+          throw error
+        }
         await supabase.from('cms_history').insert({
-          entity_type: 'theme', entity_id: data.id, action: 'update',
+          entity_type: 'theme', entity_id: data.id, action: current ? 'update' : 'create',
           previous_data: current, new_data: data, description: 'Updated theme colors'
         })
         return new Response(JSON.stringify({ data }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
@@ -561,9 +585,10 @@ Deno.serve(async (req) => {
     }
   } catch (error) {
     console.error('CMS Admin error:', error)
-    const message = error instanceof Error && error.message.includes('must be')
-      ? error.message
-      : 'An error occurred processing your request'
+    const errMsg = error instanceof Error ? error.message : String(error)
+    const message = errMsg.includes('must be') || errMsg.includes('at least') || errMsg.includes('at most')
+      ? errMsg
+      : `An error occurred: ${errMsg}`
     return new Response(
       JSON.stringify({ error: message }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
