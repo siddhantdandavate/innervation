@@ -14,9 +14,9 @@ const Logo = ({ variant = "default", showText = false, size = "md", className = 
   const { theme } = useTheme();
 
   const sizes = {
-    sm: { height: "h-8" },
-    md: { height: "h-10" },
-    lg: { height: "h-14" },
+    sm: { height: "h-10" },       // 40px — mobile
+    md: { height: "h-[54px]" },   // 54px — desktop
+    lg: { height: "h-16" },       // 64px — large/admin
   };
 
   const { height } = sizes[size];
