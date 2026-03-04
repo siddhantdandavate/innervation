@@ -1,6 +1,7 @@
 import { useState, useEffect, ReactNode } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { cmsAdmin } from '@/lib/cms';
+import Logo from '@/components/Logo';
 import { Button } from '@/components/ui/button';
 import {
   LayoutDashboard,
@@ -70,12 +71,7 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
         <div className="flex flex-col h-full">
           {/* Logo */}
           <div className="h-16 flex items-center px-6 border-b border-slate-700">
-            <Link to="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">IN</span>
-              </div>
-              <span className="font-semibold text-white">CMS Admin</span>
-            </Link>
+            <Logo variant="light" size="sm" />
           </div>
 
           {/* Navigation */}
