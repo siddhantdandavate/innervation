@@ -59,7 +59,7 @@ export const Header = () => {
     >
       <div className="container-narrow">
         <nav className="flex items-center justify-between">
-          <Logo variant={isScrolled ? "default" : "light"} size="md" />
+          <Logo variant={isScrolled ? "default" : "light"} size="md" className="[&_img]:h-10 md:[&_img]:h-[54px]" />
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
