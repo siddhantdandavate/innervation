@@ -189,7 +189,7 @@ const Contact = () => {
                         type="tel"
                         value={formData.phone}
                         onChange={handleChange}
-                        placeholder="+91 98765 43210"
+                        placeholder="+91 9511643510"
                         className="h-12 bg-background border-border"
                       />
                     </div>
