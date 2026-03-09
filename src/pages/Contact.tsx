@@ -263,7 +263,7 @@ const Contact = () => {
                         href="tel:+919511643510"
                         className="text-muted-foreground hover:text-brand-lime transition-colors"
                       >
-                        +91 93261 62104
+                        +91 9511643510
                       </a>
                     </div>
                   </div>
