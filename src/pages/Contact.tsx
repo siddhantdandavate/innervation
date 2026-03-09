@@ -260,7 +260,7 @@ const Contact = () => {
                     <div>
                       <h4 className="font-semibold text-foreground mb-1">Phone</h4>
                       <a
-                        href="tel:+919326162104"
+                        href="tel:+919511643510"
                         className="text-muted-foreground hover:text-brand-lime transition-colors"
                       >
                         +91 93261 62104
