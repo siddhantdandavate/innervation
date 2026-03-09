@@ -2,7 +2,7 @@
 
 A production-ready, fully themeable, CMS-powered corporate website built with React, TypeScript, and Tailwind CSS. Designed for long-term self-hosting and easy manual modification.
 
----
+------------------------------------------------------------------------
 
 ## Table of Contents
 
