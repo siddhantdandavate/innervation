@@ -178,15 +178,15 @@ async function hashToken(token: string): Promise<string> {
   return hashArray.map(b => b.toString(16).padStart(2, '0')).join('')
 }
 
-async function createAdminSession(supabase: ReturnType<typeof createClient>): Promise<string> {
+async function createAdminSession(supabase: SupabaseClient<any>): Promise<string> {
   const token = crypto.randomUUID()
   const tokenHash = await hashToken(token)
   const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000)
-  await supabase.from('cms_admin_sessions').insert({ token_hash: tokenHash, expires_at: expiresAt.toISOString() })
+  await (supabase as any).from('cms_admin_sessions').insert({ token_hash: tokenHash, expires_at: expiresAt.toISOString() })
   return token
 }
 
-async function validateAdminToken(supabase: ReturnType<typeof createClient>, token: string | null): Promise<boolean> {
+async function validateAdminToken(supabase: SupabaseClient<any>, token: string | null): Promise<boolean> {
   if (!token) return false
   try {
     const tokenHash = await hashToken(token)
