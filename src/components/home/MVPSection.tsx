@@ -1,28 +1,33 @@
 import { CheckCircle } from "lucide-react";
+import { useCMSContentWithFallback } from "@/hooks/use-cms";
 
-const deliverables = [
-  "Architectural Design",
-  "Development of the MVP/Prototype", 
-  "Early Validation",
-  "Security & DevOps Readiness",
-];
+const fallback = {
+  section_label: "Launch Fast",
+  title: "Idea to Minimum Viable Product (MVP) in",
+  title_highlight: "100 days",
+  deliverable_1: "Architectural Design",
+  deliverable_2: "Development of the MVP/Prototype",
+  deliverable_3: "Early Validation",
+  deliverable_4: "Security & DevOps Readiness",
+  floating_value: "100",
+  floating_label: "Days to MVP",
+};
 
 export const MVPSection = () => {
+  const { content } = useCMSContentWithFallback("mvp", fallback);
+
+  const deliverables = [content.deliverable_1, content.deliverable_2, content.deliverable_3, content.deliverable_4];
+
   return (
     <section className="py-20 lg:py-28 bg-background">
       <div className="container-narrow">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Left Content */}
           <div>
-            <span className="text-muted-foreground text-sm font-semibold uppercase tracking-wider">
-              Launch Fast
-            </span>
+            <span className="text-muted-foreground text-sm font-semibold uppercase tracking-wider">{content.section_label}</span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-foreground mt-3 mb-6">
-              Idea to Minimum Viable Product (MVP) in{" "}
-              <span className="text-accent">100 days</span>
+              {content.title}{" "}
+              <span className="text-accent">{content.title_highlight}</span>
             </h2>
-            
-            {/* Deliverables */}
             <div className="space-y-4 mb-8">
               <h4 className="font-semibold text-foreground text-lg">Deliverables</h4>
               {deliverables.map((item) => (
@@ -35,21 +40,13 @@ export const MVPSection = () => {
               ))}
             </div>
           </div>
-
-          {/* Right - Visual */}
           <div className="relative">
             <div className="aspect-[4/3] rounded-3xl overflow-hidden bg-gradient-to-br from-accent/20 to-accent/5 border border-border">
-              <div 
-                className="w-full h-full bg-cover bg-center"
-                style={{
-                  backgroundImage: `url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80')`,
-                }}
-              />
+              <div className="w-full h-full bg-cover bg-center" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80')` }} />
             </div>
-            {/* Floating card */}
             <div className="absolute -bottom-6 -left-6 bg-card border border-border rounded-2xl p-5 shadow-xl">
-              <div className="text-3xl font-heading font-bold text-accent">100</div>
-              <div className="text-muted-foreground text-sm">Days to MVP</div>
+              <div className="text-3xl font-heading font-bold text-accent">{content.floating_value}</div>
+              <div className="text-muted-foreground text-sm">{content.floating_label}</div>
             </div>
           </div>
         </div>
