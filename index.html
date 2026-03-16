@@ -35,6 +35,10 @@
     </noscript>
   </head>
   <body>
+    <script>
+      // Prevent FOUC: apply saved theme before first paint
+      (function(){var t=localStorage.getItem('innervation-theme');if(t==='dark'){document.documentElement.classList.add('dark')}else{document.documentElement.classList.remove('dark')}})();
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

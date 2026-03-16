@@ -182,7 +182,7 @@ const Contact = () => {
                   </div>
                 </div>
               </div>
-              <div className="bg-secondary rounded-2xl p-6 border border-border">
+              <div className="bg-card rounded-2xl p-6 border border-border">
                 <h4 className="font-heading font-semibold text-foreground mb-3">{info.promise_title}</h4>
                 <p className="text-muted-foreground text-sm leading-relaxed">{info.promise_text}</p>
               </div>

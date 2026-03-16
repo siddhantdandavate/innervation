@@ -53,13 +53,16 @@ export const Header = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-background/95 backdrop-blur-md shadow-md py-3 border-b border-border"
-          : "bg-section-dark/95 backdrop-blur-sm py-5"
+          ? "bg-background/95 backdrop-blur-md shadow-md py-2 border-b border-border"
+          : "bg-section-dark/95 backdrop-blur-sm py-3"
       }`}
     >
       <div className="container-narrow">
         <nav className="flex items-center justify-between">
-          <Logo variant={isScrolled ? "default" : "light"} size="md" className="[&_img]:h-10 md:[&_img]:h-[54px]" />
+          <Logo 
+            variant={isScrolled ? "default" : "light"} 
+            size="md"
+          />
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
@@ -127,7 +130,7 @@ export const Header = () => {
 
             <Link to="/contact">
               <Button 
-                className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold shadow-md"
+                className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold shadow-md btn-glow"
               >
                 Get in Touch
               </Button>
@@ -180,7 +183,7 @@ export const Header = () => {
               ))}
               <div className="pt-2">
                 <Link to="/contact" className="block">
-                  <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-semibold">
+                  <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-semibold btn-glow">
                     Get in Touch
                   </Button>
                 </Link>

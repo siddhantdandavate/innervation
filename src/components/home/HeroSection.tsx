@@ -5,9 +5,9 @@ import { useCMSContentWithFallback } from "@/hooks/use-cms";
 
 const fallback = {
   badge_text: "Digital Innovation Partner",
-  title: "Your trusted Technology Partner for",
-  title_highlight: "Digital Transformation",
-  subtitle: "We help businesses accelerate growth through innovative IT solutions and digital excellence.",
+  title: "We Build Digital Solutions That Drive Growth",
+  title_highlight: "",
+  subtitle: "Innervation IT Solutions – Digital Solutions That Drive Business Growth",
   cta_primary_text: "Get Started",
   cta_primary_link: "/contact",
   cta_secondary_text: "Explore Services",
@@ -39,14 +39,16 @@ export const HeroSection = () => {
 
       <div className="container-narrow relative z-10 py-20">
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 bg-section-dark-foreground/5 backdrop-blur-sm border border-section-dark-foreground/10 rounded-full px-4 py-2 mb-8">
+          <div className="inline-flex items-center gap-2 bg-accent/10 backdrop-blur-sm border border-accent/20 rounded-full px-5 py-2.5 mb-8">
             <Sparkles className="w-4 h-4 text-accent" />
-            <span className="text-section-dark-foreground/80 text-sm font-medium">{content.badge_text}</span>
+            <span className="text-accent text-sm font-semibold">{content.badge_text}</span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-section-dark-foreground leading-[1.1] mb-6">
             {content.title}{" "}
-            <span className="text-accent">{content.title_highlight}</span>
+            {content.title_highlight && (
+              <span className="text-accent">{content.title_highlight}</span>
+            )}
           </h1>
 
           <p className="text-lg lg:text-xl text-section-dark-foreground/70 mb-10 leading-relaxed max-w-2xl">
@@ -55,7 +57,7 @@ export const HeroSection = () => {
 
           <div className="flex flex-col sm:flex-row gap-4">
             <Link to={content.cta_primary_link}>
-              <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold px-8 h-14 text-base shadow-lg shadow-accent/20">
+              <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold px-8 h-14 text-base shadow-lg btn-glow">
                 {content.cta_primary_text}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
