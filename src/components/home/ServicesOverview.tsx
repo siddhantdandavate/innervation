@@ -50,12 +50,12 @@ export const ServicesOverview = () => {
             <Link
               key={service.id}
               to={service.href}
-              className="group p-6 lg:p-8 rounded-2xl bg-card border border-border hover:border-accent/50 hover:shadow-xl transition-all duration-300"
+              className="group p-6 lg:p-8 rounded-2xl bg-card border border-border hover:border-accent/50 card-lift"
             >
               <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center mb-5 group-hover:bg-accent/20 group-hover:scale-110 transition-all duration-300">
                 <service.icon className="w-7 h-7 text-accent" />
               </div>
-              <h3 className="font-heading font-semibold text-foreground text-xl mb-3">{service.title}</h3>
+              <h3 className="font-heading font-semibold text-card-foreground text-xl mb-3">{service.title}</h3>
               <p className="text-muted-foreground text-base leading-relaxed mb-4">{service.description}</p>
               <div className="flex items-center gap-2 text-accent font-medium text-sm opacity-0 group-hover:opacity-100 transition-opacity">
                 Learn more
@@ -68,7 +68,7 @@ export const ServicesOverview = () => {
         <div className="text-center mt-14">
           <Link
             to={content.cta_link}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground rounded-xl font-semibold hover:bg-primary/90 transition-colors shadow-lg"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-accent-foreground rounded-xl font-semibold hover:bg-accent/90 transition-colors shadow-lg btn-glow"
           >
             {content.cta_text}
             <ArrowRight className="w-5 h-5" />

@@ -68,7 +68,6 @@ const CustomerReviews = () => {
   return (
     <section className="py-20 lg:py-28 bg-muted/30">
       <div className="container-narrow">
-        {/* Section Header */}
         <div className="text-center mb-14">
           <span className="text-accent text-sm font-semibold uppercase tracking-wider">
             Testimonials
@@ -78,16 +77,14 @@ const CustomerReviews = () => {
           </h2>
         </div>
 
-        {/* Reviews Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {reviews.map((review) => (
             <div
               key={review.id}
-              className="bg-background rounded-2xl p-6 lg:p-8 border border-border hover:border-accent/30 hover:shadow-lg transition-all duration-300"
+              className="bg-card rounded-2xl p-6 lg:p-8 border border-border hover:border-accent/30 card-lift"
             >
               <Quote className="w-10 h-10 text-accent/20 mb-4" />
               
-              {/* Rating */}
               {review.rating && (
                 <div className="flex gap-1 mb-4">
                   {[...Array(5)].map((_, i) => (
@@ -122,7 +119,7 @@ const CustomerReviews = () => {
                   </div>
                 )}
                 <div>
-                  <div className="font-semibold text-foreground">
+                  <div className="font-semibold text-card-foreground">
                     {review.customer_name}
                   </div>
                   {(review.customer_designation || review.customer_company) && (

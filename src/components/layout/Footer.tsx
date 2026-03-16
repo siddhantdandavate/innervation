@@ -51,7 +51,7 @@ export const Footer = () => {
       <div className="container-narrow">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           <div>
-            <Logo variant="light" size="md" className="mb-6" />
+            <Logo variant="light" size="sm" className="mb-6" />
             <p className="text-section-dark-foreground/60 text-sm leading-relaxed">
               {footer.company_description}
             </p>

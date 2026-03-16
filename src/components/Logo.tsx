@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
-import logoDark from "@/assets/logo-dark.svg";
-import logoLight from "@/assets/logo-light.svg";
-import { useTheme } from "@/hooks/use-theme";
+import logoBrand from "@/assets/logo-brand.png";
 
 interface LogoProps {
   variant?: "default" | "light" | "dark";
@@ -10,32 +8,30 @@ interface LogoProps {
   className?: string;
 }
 
-const Logo = ({ variant = "default", showText = false, size = "md", className = "" }: LogoProps) => {
-  const { theme } = useTheme();
-
+const Logo = ({ variant = "default", showText = true, size = "md", className = "" }: LogoProps) => {
   const sizes = {
-    sm: { height: "h-10" },       // 40px — mobile
-    md: { height: "h-[54px]" },   // 54px — desktop
-    lg: { height: "h-16" },       // 64px — large/admin
+    sm: { height: "h-[36px]", text: "text-sm" },
+    md: { height: "h-[48px]", text: "text-base" },
+    lg: { height: "h-[56px]", text: "text-lg" },
   };
 
-  const { height } = sizes[size];
+  const { height, text } = sizes[size];
 
-  // Determine which logo to show based on variant or current theme
-  const getLogo = () => {
-    if (variant === "light") return logoLight;
-    if (variant === "dark") return logoDark;
-    // Default: use theme-appropriate logo
-    return theme === "dark" ? logoLight : logoDark;
-  };
+  // Text color: always white on dark backgrounds, foreground otherwise
+  const textColor = variant === "light"
+    ? "text-white"
+    : "text-foreground";
 
   return (
     <Link to="/" className={`flex items-center gap-3 group ${className}`}>
       <img
-        src={getLogo()}
+        src={logoBrand}
         alt="Innervation IT Solutions"
         className={`${height} w-auto transition-transform duration-300 group-hover:scale-105`}
       />
+      <span className={`${text} font-heading font-semibold ${textColor} hidden sm:inline whitespace-nowrap`}>
+        Innervation IT Solutions
+      </span>
     </Link>
   );
 };
