@@ -1,55 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Mail, Phone, MapPin, Clock, Send, CheckCircle } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
-import { useCMSContentWithFallback } from "@/hooks/use-cms";
-
-const heroFallback = {
-  section_label: "Contact Us",
-  title: "Let's Start a",
-  title_highlight: "Conversation",
-  description: "Ready to transform your business with innovative technology solutions? Our team of experts is here to help you navigate the path forward.",
-};
-
-const formFallback = {
-  form_title: "Request a Consultation",
-  form_description: "Fill out the form below and one of our consultants will reach out within 24 business hours.",
-  success_title: "Thank You!",
-  success_message: "We've received your message and will get back to you shortly. In the meantime, feel free to explore our services.",
-};
-
-const infoFallback = {
-  title: "Contact Information",
-  address_title: "Office Location",
-  address_line_1: "Ravet, Pune",
-  address_line_2: "Maharashtra, India",
-  phone_title: "Phone",
-  phone: "+91 9511643510",
-  email_title: "Email",
-  email: "info@innervationit.com",
-  hours_title: "Business Hours",
-  hours_line_1: "Monday - Friday",
-  hours_line_2: "9:00 AM - 6:00 PM IST",
-  promise_title: "Our Response Promise",
-  promise_text: "We understand that time is critical in business. That's why we commit to responding to all inquiries within 24 business hours. For urgent matters, please call us directly.",
-};
+import { content } from "@/data/content";
 
 const Contact = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [visitorId, setVisitorId] = useState<string | null>(null);
   const [formData, setFormData] = useState({ firstName: "", lastName: "", email: "", company: "", phone: "", message: "" });
 
-  const { content: hero } = useCMSContentWithFallback("contact_hero", heroFallback);
-  const { content: form } = useCMSContentWithFallback("contact_form", formFallback);
-  const { content: info } = useCMSContentWithFallback("contact_info", infoFallback);
-
-  useEffect(() => { setVisitorId(localStorage.getItem("visitor-id")); }, []);
+  const hero = content.contact_hero;
+  const form = content.contact_form;
+  const info = content.contact_info;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -59,16 +25,14 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const { error } = await supabase.from("contact_submissions").insert({
-        first_name: formData.firstName, last_name: formData.lastName, email: formData.email,
-        company: formData.company || null, phone: formData.phone || null, message: formData.message, visitor_id: visitorId,
-      });
-      if (error) throw error;
+      // For static site: open mailto link with form data
+      const subject = `Contact from ${formData.firstName} ${formData.lastName}`;
+      const body = `Name: ${formData.firstName} ${formData.lastName}\nEmail: ${formData.email}\nCompany: ${formData.company}\nPhone: ${formData.phone}\n\nMessage:\n${formData.message}`;
+      window.open(`mailto:${info.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
       setIsSubmitted(true);
-      toast({ title: "Message Sent Successfully", description: "Our team will get back to you within 24 business hours." });
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      toast({ title: "Error", description: "Failed to send message. Please try again.", variant: "destructive" });
+      toast({ title: "Message Prepared", description: "Your email client should open with the message. You can also email us directly." });
+    } catch {
+      toast({ title: "Error", description: "Something went wrong. Please email us directly.", variant: "destructive" });
     } finally {
       setIsSubmitting(false);
     }

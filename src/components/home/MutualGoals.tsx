@@ -1,18 +1,9 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Quote } from "lucide-react";
-import { useCMSContentWithFallback } from "@/hooks/use-cms";
-
-const fallback = {
-  title: "We help to achieve mutual goals",
-  quote: "Innervation IT Solutions has a platform that simplifies our strategies and gives us actionable results. We've achieved 2X growth in our first year of partnering with them.",
-  author_name: "Saurabh Patwari",
-  author_role: "Founder & CEO, Innervation IT Solutions",
-  cta_text: "Learn More",
-  cta_link: "/about",
-};
+import { content } from "@/data/content";
 
 export const MutualGoals = () => {
-  const { content } = useCMSContentWithFallback("mutual_goals", fallback);
+  const data = content.mutual_goals;
 
   return (
     <section className="py-20 lg:py-28 bg-background">
@@ -22,14 +13,14 @@ export const MutualGoals = () => {
             <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mb-6">
               <Quote className="w-7 h-7 text-accent" />
             </div>
-            <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-6">{content.title}</h2>
-            <p className="text-muted-foreground mb-8 leading-relaxed text-lg">"{content.quote}"</p>
+            <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-6">{data.title}</h2>
+            <p className="text-muted-foreground mb-8 leading-relaxed text-lg">"{data.quote}"</p>
             <div className="mb-8">
-              <div className="font-semibold text-foreground text-lg">{content.author_name}</div>
-              <div className="text-muted-foreground">{content.author_role}</div>
+              <div className="font-semibold text-foreground text-lg">{data.author_name}</div>
+              <div className="text-muted-foreground">{data.author_role}</div>
             </div>
-            <Link to={content.cta_link} className="inline-flex items-center gap-2 text-accent font-semibold hover:gap-3 transition-all group">
-              {content.cta_text}
+            <Link to={data.cta_link} className="inline-flex items-center gap-2 text-accent font-semibold hover:gap-3 transition-all group">
+              {data.cta_text}
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>

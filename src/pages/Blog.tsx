@@ -1,23 +1,10 @@
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Layout } from '@/components/layout/Layout';
-import { cms, CMSBlog } from '@/lib/cms';
+import { blogs } from '@/data/blogs';
 import { Card, CardContent } from '@/components/ui/card';
 import { Calendar, ArrowRight } from 'lucide-react';
 
 export default function Blog() {
-  const [blogs, setBlogs] = useState<CMSBlog[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const loadBlogs = async () => {
-      const data = await cms.getBlogs();
-      setBlogs(data);
-      setLoading(false);
-    };
-    loadBlogs();
-  }, []);
-
   return (
     <Layout>
       <section className="py-20 bg-background">
@@ -31,11 +18,7 @@ export default function Blog() {
             </p>
           </div>
 
-          {loading ? (
-            <div className="text-center py-12">
-              <p className="text-muted-foreground">Loading blogs...</p>
-            </div>
-          ) : blogs.length === 0 ? (
+          {blogs.length === 0 ? (
             <div className="text-center py-12">
               <p className="text-muted-foreground">No blog posts yet. Check back soon!</p>
             </div>
@@ -43,11 +26,11 @@ export default function Blog() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {blogs.map((blog) => (
                 <Link key={blog.id} to={`/blog/${blog.slug}`}>
-                  <Card className="h-full hover:shadow-lg transition-shadow overflow-hidden group">
-                    {blog.featured_image && (
+                  <Card className="h-full hover:shadow-lg transition-shadow overflow-hidden group card-lift">
+                    {blog.image && (
                       <div className="aspect-video overflow-hidden">
                         <img
-                          src={blog.featured_image}
+                          src={blog.image}
                           alt={blog.title}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
@@ -56,19 +39,15 @@ export default function Blog() {
                     <CardContent className="p-6">
                       <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
                         <Calendar className="w-4 h-4" />
-                        <span>
-                          {blog.published_at
-                            ? new Date(blog.published_at).toLocaleDateString()
-                            : new Date(blog.created_at).toLocaleDateString()}
-                        </span>
+                        <span>{new Date(blog.date).toLocaleDateString()}</span>
                       </div>
-                      <h2 className="text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                      <h2 className="text-xl font-semibold text-foreground mb-2 group-hover:text-accent transition-colors">
                         {blog.title}
                       </h2>
                       <p className="text-muted-foreground line-clamp-3 mb-4">
-                        {blog.excerpt || blog.content.substring(0, 150)}...
+                        {blog.excerpt}
                       </p>
-                      <div className="flex items-center text-primary font-medium">
+                      <div className="flex items-center text-accent font-medium">
                         Read more
                         <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                       </div>

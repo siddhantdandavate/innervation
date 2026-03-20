@@ -1,14 +1,8 @@
 import { Link } from "react-router-dom";
 import {
-  Globe,
-  Smartphone,
-  HeadphonesIcon,
-  FolderKanban,
-  MessageSquare,
-  Share2,
-  ArrowRight
+  Globe, Smartphone, HeadphonesIcon, FolderKanban, MessageSquare, Share2, ArrowRight
 } from "lucide-react";
-import { useCMSContentWithFallback } from "@/hooks/use-cms";
+import { content } from "@/data/content";
 
 const services = [
   { id: "web", title: "Website Development", description: "High-performance websites tailored to your brand.", icon: Globe, href: "/services/web-development" },
@@ -19,29 +13,21 @@ const services = [
   { id: "social", title: "Social Media Marketing", description: "Targeted strategies to grow your audience.", icon: Share2, href: "/services/social-media" },
 ];
 
-const fallback = {
-  section_label: "What We Offer",
-  title: "Our Services",
-  description: "We deliver end-to-end digital solutions to help your business thrive.",
-  cta_text: "Explore All Services",
-  cta_link: "/services",
-};
-
 export const ServicesOverview = () => {
-  const { content } = useCMSContentWithFallback("services_overview", fallback);
+  const data = content.services_overview;
 
   return (
     <section className="py-20 lg:py-28 bg-background">
       <div className="container-narrow">
         <div className="text-center mb-16">
           <span className="inline-block text-accent text-sm font-semibold uppercase tracking-wider mb-3">
-            {content.section_label}
+            {data.section_label}
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-foreground">
-            {content.title}
+            {data.title}
           </h2>
           <p className="text-muted-foreground mt-4 max-w-2xl mx-auto text-lg">
-            {content.description}
+            {data.description}
           </p>
         </div>
 
@@ -67,10 +53,10 @@ export const ServicesOverview = () => {
 
         <div className="text-center mt-14">
           <Link
-            to={content.cta_link}
+            to={data.cta_link}
             className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-accent-foreground rounded-xl font-semibold hover:bg-accent/90 transition-colors shadow-lg btn-glow"
           >
-            {content.cta_text}
+            {data.cta_text}
             <ArrowRight className="w-5 h-5" />
           </Link>
         </div>

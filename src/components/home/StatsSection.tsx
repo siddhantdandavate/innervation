@@ -1,24 +1,13 @@
-import { useCMSContentWithFallback } from "@/hooks/use-cms";
-
-const fallback = {
-  stat_1_value: "100+",
-  stat_1_label: "Satisfied Clients",
-  stat_2_value: "150+",
-  stat_2_label: "Projects Delivered",
-  stat_3_value: "500+",
-  stat_3_label: "Tech Solutions Built",
-  stat_4_value: "25+",
-  stat_4_label: "Industry Experts",
-};
+import { content } from "@/data/content";
 
 export const StatsSection = () => {
-  const { content } = useCMSContentWithFallback("stats", fallback);
+  const data = content.stats;
 
   const stats = [
-    { value: content.stat_1_value, label: content.stat_1_label },
-    { value: content.stat_2_value, label: content.stat_2_label },
-    { value: content.stat_3_value, label: content.stat_3_label },
-    { value: content.stat_4_value, label: content.stat_4_label },
+    { value: data.stat_1_value, label: data.stat_1_label },
+    { value: data.stat_2_value, label: data.stat_2_label },
+    { value: data.stat_3_value, label: data.stat_3_label },
+    { value: data.stat_4_value, label: data.stat_4_label },
   ];
 
   return (

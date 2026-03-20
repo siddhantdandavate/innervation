@@ -2,16 +2,10 @@ import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import {
-  ArrowRight,
-  Globe,
-  Smartphone,
-  HeadphonesIcon,
-  FolderKanban,
-  MessageSquare,
-  Share2,
-  CheckCircle
+  ArrowRight, Globe, Smartphone, HeadphonesIcon,
+  FolderKanban, MessageSquare, Share2, CheckCircle
 } from "lucide-react";
-import { useCMSContentWithFallback } from "@/hooks/use-cms";
+import { content } from "@/data/content";
 
 const services = [
   { icon: Globe, title: "Website Development", description: "Build stunning, high-performance websites tailored to your brand.", benefits: ["Responsive, mobile-first design", "Fast loading and SEO optimized", "E-commerce ready", "Easy content management"], href: "/services/web-development" },
@@ -22,21 +16,9 @@ const services = [
   { icon: Share2, title: "Social Media Marketing", description: "Targeted strategies to grow your audience and boost conversions.", benefits: ["Content creation", "Campaign management", "Analytics & reporting", "Community engagement"], href: "/services/social-media" },
 ];
 
-const heroFallback = {
-  section_label: "Our Services",
-  title: "Digital Solutions for Your Business",
-  description: "From websites to apps, marketing to support — we help you grow.",
-};
-
-const ctaFallback = {
-  title: "Ready to Get Started?",
-  description: "Let's discuss how we can help your business grow.",
-  cta_text: "Contact Us",
-};
-
 const Services = () => {
-  const { content: hero } = useCMSContentWithFallback("services_hero", heroFallback);
-  const { content: cta } = useCMSContentWithFallback("services_cta", ctaFallback);
+  const hero = content.services_hero;
+  const cta = content.services_cta;
 
   return (
     <Layout>
@@ -54,7 +36,7 @@ const Services = () => {
         <div className="container-narrow">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service) => (
-              <div key={service.title} className="group p-8 rounded-2xl bg-card border border-border hover:border-accent/50 hover:shadow-xl transition-all duration-300">
+              <div key={service.title} className="group p-8 rounded-2xl bg-card border border-border hover:border-accent/50 hover:shadow-xl transition-all duration-300 card-lift">
                 <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-colors">
                   <service.icon className="w-7 h-7 text-accent" />
                 </div>
