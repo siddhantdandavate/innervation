@@ -2,61 +2,16 @@ import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, Target, Eye, Lightbulb, Users, Shield } from "lucide-react";
-import { useCMSContentWithFallback } from "@/hooks/use-cms";
+import { content } from "@/data/content";
 
 const iconMap = [Lightbulb, Users, Shield, Target];
 
-const heroFallback = {
-  section_label: "About Innervation IT Solutions",
-  title: "Empowering Enterprises Through Technology Innovation",
-  description: "We are a team of technology strategists, architects, and engineers dedicated to helping organizations harness the full potential of digital transformation.",
-};
-
-const companyFallback = {
-  title: "Who We Are",
-  paragraph_1: "Innervation IT Solutions is a premier technology consulting firm specializing in enterprise digital transformation, artificial intelligence, cloud architecture, and custom software development.",
-  paragraph_2: "Founded by industry veterans with decades of combined experience, we bridge the gap between business strategy and technology execution. Our multidisciplinary teams combine deep technical expertise with business acumen to deliver solutions that drive measurable outcomes.",
-  paragraph_3: "We partner with organizations across financial services, healthcare, manufacturing, retail, and the public sector to modernize operations, enhance customer experiences, and create new revenue streams through technology innovation.",
-  stat_1_value: "15+", stat_1_label: "Years of Excellence",
-  stat_2_value: "250+", stat_2_label: "Projects Delivered",
-  stat_3_value: "50+", stat_3_label: "Expert Consultants",
-  stat_4_value: "98%", stat_4_label: "Client Retention",
-};
-
-const missionFallback = {
-  mission_title: "Our Mission",
-  mission_text: "To empower organizations with innovative technology solutions that drive operational excellence, accelerate growth, and create sustainable competitive advantage in an increasingly digital world.",
-  vision_title: "Our Vision",
-  vision_text: "To be the most trusted technology partner for enterprises seeking to navigate digital transformation, recognized for our technical excellence, innovative approach, and unwavering commitment to client success.",
-};
-
-const valuesFallback = {
-  section_label: "Our Foundation",
-  title: "Core Values That Guide Us",
-  description: "Our values aren't just words on a wall—they shape every decision, interaction, and deliverable.",
-  value_1_title: "Innovation",
-  value_1_description: "We continuously explore emerging technologies to deliver cutting-edge solutions that give our clients a competitive edge.",
-  value_2_title: "Partnership",
-  value_2_description: "We view every client relationship as a strategic partnership, investing in their long-term success as our own.",
-  value_3_title: "Integrity",
-  value_3_description: "We operate with complete transparency, delivering honest assessments and realistic commitments in every engagement.",
-  value_4_title: "Excellence",
-  value_4_description: "We hold ourselves to the highest standards, ensuring every deliverable reflects our commitment to quality.",
-};
-
-const ctaFallback = {
-  title: "Ready to Partner with Us?",
-  description: "Let's explore how Innervation IT Solutions can help you achieve your technology and business objectives.",
-  cta_primary_text: "Contact Our Team",
-  cta_secondary_text: "View Our Services",
-};
-
 const About = () => {
-  const { content: hero } = useCMSContentWithFallback("about_hero", heroFallback);
-  const { content: company } = useCMSContentWithFallback("about_company", companyFallback);
-  const { content: mission } = useCMSContentWithFallback("about_mission", missionFallback);
-  const { content: vals } = useCMSContentWithFallback("about_values", valuesFallback);
-  const { content: cta } = useCMSContentWithFallback("about_cta", ctaFallback);
+  const hero = content.about_hero;
+  const company = content.about_company;
+  const mission = content.about_mission;
+  const vals = content.about_values;
+  const cta = content.about_cta;
 
   const values = [
     { icon: iconMap[0], title: vals.value_1_title, description: vals.value_1_description },

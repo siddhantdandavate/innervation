@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook } from "lucide-react";
 import Logo from "@/components/Logo";
-import { useCMSContentWithFallback } from "@/hooks/use-cms";
+import { content } from "@/data/content";
 
 const quickLinks = [
   { name: "Home", href: "/" },
@@ -20,31 +20,11 @@ const services = [
   { name: "Social Media Marketing", href: "/services/social-media" },
 ];
 
-const footerFallback = {
-  company_description: "Your trusted technology partner for digital transformation.",
-  copyright: "Innervation IT Solutions. All rights reserved.",
-  privacy_link_text: "Privacy Policy",
-  terms_link_text: "Terms of Service",
-};
-
-const contactFallback = {
-  address: "Ravet, Pune, India",
-  phone: "+91 93261 62104",
-  email: "info@innervationit.com",
-};
-
-const socialFallback = {
-  linkedin_url: "#",
-  twitter_url: "#",
-  facebook_url: "#",
-  instagram_url: "",
-};
-
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
-  const { content: footer } = useCMSContentWithFallback("footer", footerFallback);
-  const { content: contact } = useCMSContentWithFallback("footer_contact", contactFallback);
-  const { content: social } = useCMSContentWithFallback("social_links", socialFallback);
+  const footer = content.footer;
+  const contact = content.footer_contact;
+  const social = content.social_links;
 
   return (
     <footer className="bg-section-dark text-section-dark-foreground pt-16 pb-8">
