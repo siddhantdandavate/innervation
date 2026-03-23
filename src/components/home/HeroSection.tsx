@@ -20,7 +20,7 @@ export const HeroSection = () => {
         />
       </div>
 
-      <div className="container-narrow relative z-10 py-20">
+      <div className="container-narrow relative z-10 pt-32 pb-20">
         <div className="max-w-3xl">
           <div className="inline-flex items-center gap-2 bg-accent/10 backdrop-blur-sm border border-accent/20 rounded-full px-5 py-2.5 mb-8">
             <Sparkles className="w-4 h-4 text-accent" />
